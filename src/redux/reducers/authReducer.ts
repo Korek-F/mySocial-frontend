@@ -29,6 +29,7 @@ export const authReducer = (state: State = initialState, action: Action): State 
                 ...state,
                 loading: false,
                 access: action.payload,
+                message: "Successfully logged in!"
             }
 
         case ActionType.VERIFY:
@@ -41,6 +42,16 @@ export const authReducer = (state: State = initialState, action: Action): State 
                 ...state,
                 loading: true,
                 message: action.payload,
+            }
+        case ActionType.DELETE_MESSAGES:
+            return {
+                ...state,
+                message: null,
+            }
+        case ActionType.DELETE_ERRORS:
+            return {
+                ...state,
+                error: null,
             }
         default:
             return state;

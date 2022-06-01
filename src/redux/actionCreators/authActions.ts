@@ -11,7 +11,7 @@ export const login = (username: string, password: string) => {
 
         try {
             const res = await axios.post(`${BASE_URL}/auth/token/`, {
-                "username": username, "password": password
+                "username": username, "passwrd": password
             })
             dispatch({
                 type: ActionType.LOGIN_SUCCESS,
