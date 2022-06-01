@@ -10,7 +10,10 @@ export const REGISTER_SUCCESS = "REGISTER_SUCCESS"
 export enum ActionType {
     LOGIN = "LOGIN",
     LOGIN_SUCCESS = "LOGIN_SUCCESS",
-    LOGIN_ERROR = "LOGIN_ERROR"
+    LOGIN_ERROR = "LOGIN_ERROR",
+    VERIFY = "VERIFY",
+    VERIFY_SUCCESS = "VERIFY_SUCCESS",
+    VERIFY_ERROR = "VERIFY_ERROR",
 }
 
 interface loginAction {
@@ -25,4 +28,19 @@ interface loginError {
     type: ActionType.LOGIN_ERROR;
 }
 
-export type Action = loginAction | loginActionSuccess | loginError
+interface verifyAction {
+    type: ActionType.VERIFY
+}
+
+interface verifySuccessAction {
+    type: ActionType.VERIFY_SUCCESS;
+    payload: string;
+}
+
+interface verifyErrorAction {
+    type: ActionType.VERIFY_ERROR
+}
+
+
+export type Action = loginAction | loginActionSuccess | loginError | verifyAction
+    | verifySuccessAction | verifyErrorAction

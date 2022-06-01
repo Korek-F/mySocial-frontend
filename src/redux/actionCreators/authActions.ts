@@ -25,3 +25,24 @@ export const login = (username: string, password: string) => {
         }
     }
 }
+
+export const verify = (token: string) => {
+    return async (dispatch: Dispatch<Action>) => {
+        dispatch({
+            type: ActionType.VERIFY
+        })
+        try {
+            const res = await axios.post(`${BASE_URL}/auth/email-verify/`, {
+                "token": token
+            })
+            dispatch({
+                type: ActionType.VERIFY_SUCCESS,
+                payload: "Verification successed, you can login now!"
+            })
+
+        }
+        catch (e) {
+            console.log("E", e)
+        }
+    }
+}

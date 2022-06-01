@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { Navbar } from "./components/navbar/Navbar";
-import * as ROUTES from './constants/routes';
+import { Activate } from "./pages/Activate";
+
 import { Home } from "./pages/Home";
 import { Signin } from "./pages/Signin";
 import { Signup } from "./pages/Signup";
@@ -11,24 +12,10 @@ function App() {
     <Router>
       <Navbar />
       <Routes>
-        <Route
-          path={ROUTES.HOME}
-          element={
-            <Home />
-          }
-        />
-        <Route
-          path={ROUTES.SIGNIN}
-          element={
-            <Signin />
-          }
-        />
-        <Route
-          path={ROUTES.SIGNUP}
-          element={
-            <Signup />
-          }
-        />
+        <Route path="/" element={<Home />} />
+        <Route path="/signin" element={<Signin />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/activate/:token" element={<Activate />} />
 
       </Routes>
     </Router>

@@ -5,6 +5,7 @@ interface State {
     refresh: string | null;
     loading: boolean;
     error: string | null;
+    message: string | null;
 }
 
 
@@ -12,7 +13,8 @@ const initialState = {
     access: localStorage.getItem("access"),
     refresh: localStorage.getItem("refresh"),
     loading: false,
-    error: null
+    error: null,
+    message: null
 }
 
 export const authReducer = (state: State = initialState, action: Action): State => {
@@ -27,6 +29,18 @@ export const authReducer = (state: State = initialState, action: Action): State 
                 ...state,
                 loading: false,
                 access: action.payload,
+            }
+
+        case ActionType.VERIFY:
+            return {
+                ...state,
+                loading: true
+            }
+        case ActionType.VERIFY_SUCCESS:
+            return {
+                ...state,
+                loading: true,
+                message: action.payload,
             }
         default:
             return state;
