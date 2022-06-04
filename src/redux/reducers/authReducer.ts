@@ -31,7 +31,12 @@ export const authReducer = (state: State = initialState, action: Action): State 
                 access: action.payload,
                 message: "Successfully logged in!"
             }
-
+        case ActionType.LOGIN_ERROR:
+            return {
+                ...state,
+                loading: false,
+                error: "Wrong password or Email"
+            }
         case ActionType.VERIFY:
             return {
                 ...state,

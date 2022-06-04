@@ -11,7 +11,7 @@ export const login = (username: string, password: string) => {
 
         try {
             const res = await axios.post(`${BASE_URL}/auth/token/`, {
-                "username": username, "passwrd": password
+                "username": username, "password": password
             })
             dispatch({
                 type: ActionType.LOGIN_SUCCESS,
@@ -22,6 +22,9 @@ export const login = (username: string, password: string) => {
         }
         catch (e) {
             console.log(e)
+            dispatch({
+                type: ActionType.LOGIN_ERROR
+            })
         }
     }
 }
@@ -32,7 +35,7 @@ export const verify = (token: string) => {
             type: ActionType.VERIFY
         })
         try {
-            const res = await axios.post(`${BASE_URL}/auth/email-verify/`, {
+            await axios.post(`${BASE_URL}/auth/email-verify/`, {
                 "token": token
             })
             dispatch({
@@ -43,6 +46,10 @@ export const verify = (token: string) => {
         }
         catch (e) {
             console.log("E", e)
+            dispatch({
+                type: ActionType.VERIFY_ERROR,
+                payload: "Invalid Token or something went wrong!"
+            })
         }
     }
 }
