@@ -7,7 +7,8 @@ export enum ActionType {
     VERIFY_SUCCESS = "VERIFY_SUCCESS",
     VERIFY_ERROR = "VERIFY_ERROR",
     DELETE_ERRORS = "DELETE_ERRORS",
-    DELETE_MESSAGES = "DELETE_MESSAGES"
+    DELETE_MESSAGES = "DELETE_MESSAGES",
+    LOGOUT = "LOGOUT",
 }
 
 interface loginAction {
@@ -43,5 +44,9 @@ interface deleteErrorsAction {
     type: ActionType.DELETE_ERRORS
 }
 
+interface logoutAction {
+    type: ActionType.LOGOUT
+}
+
 export type Action = loginAction | loginActionSuccess | loginError | verifyAction
-    | verifySuccessAction | verifyErrorAction | deleteMessagesAction | deleteErrorsAction
+    | verifySuccessAction | verifyErrorAction | deleteMessagesAction | deleteErrorsAction | logoutAction

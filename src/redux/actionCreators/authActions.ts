@@ -53,3 +53,9 @@ export const verify = (token: string) => {
         }
     }
 }
+
+export const logout = () => (dispatch: Dispatch<Action>) => {
+    dispatch({ type: ActionType.LOGOUT })
+    localStorage.removeItem("access");
+    localStorage.removeItem("refresh");
+}
