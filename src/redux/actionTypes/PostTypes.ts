@@ -15,18 +15,13 @@ export type PostInterface = {
 
 
 export enum ActionType {
-    GET_POSTS = "GET_POSTS",
     GET_POSTS_SUCCESS = "GET_POSTS_SUCCESS",
-    GET_POSTS_ERROR = "GET_POSTS_ERROR",
 }
 
-interface getPostsAction {
-    type: ActionType.GET_POSTS;
-}
 
 interface getPostsSuccessAction {
     type: ActionType.GET_POSTS_SUCCESS;
     payload: PostInterface[]
 }
 
-export type Action = getPostsAction | getPostsSuccessAction
+export type Action = getPostsSuccessAction

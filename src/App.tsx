@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { ErrorMessage } from "./components/ErrorMessage";
 import { Loading } from "./components/Loading";
@@ -10,11 +12,22 @@ import { Home } from "./pages/Home";
 import { Profile } from "./pages/Profile";
 import { Signin } from "./pages/Signin";
 import { Signup } from "./pages/Signup";
-
+import { getUserProfile } from "./redux/actionCreators/userActions";
+import jwt_decode from 'jwt-decode'
+import { TokenInterface } from "./redux/actionTypes/authTypes";
 
 function App() {
+  const dispatch = useDispatch()
   const { loading, error, message } = useTypedSelector(state => state.auth)
-  const { post_loading } = useTypedSelector(state => state.posts)
+
+  useEffect(() => {
+    const access = localStorage.getItem("access")
+    if (access) {
+      const decoded_access = jwt_decode(access) as TokenInterface
+      dispatch(getUserProfile(decoded_access.user_id) as any)
+    }
+
+  }, [])
   return (
     <div className="main_content">
       <Router>
@@ -28,7 +41,7 @@ function App() {
             <Route path="/profile/:username" element={<Profile />} />
           </Routes>
         </div>
-        {loading || post_loading && <Loading />}
+        {loading && <Loading />}
         {error && <ErrorMessage error={error} />}
         {message && <SuccessMessage message={message} />}
 

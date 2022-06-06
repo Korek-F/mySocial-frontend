@@ -1,39 +1,48 @@
 
-export enum ActionType {
-    LOGIN = "LOGIN",
-    LOGIN_SUCCESS = "LOGIN_SUCCESS",
-    LOGIN_ERROR = "LOGIN_ERROR",
-    VERIFY = "VERIFY",
-    VERIFY_SUCCESS = "VERIFY_SUCCESS",
-    VERIFY_ERROR = "VERIFY_ERROR",
-    DELETE_ERRORS = "DELETE_ERRORS",
-    DELETE_MESSAGES = "DELETE_MESSAGES",
-    LOGOUT = "LOGOUT",
+export type TokenInterface = {
+    exp: number;
+    iat: number;
+    jti: string;
+    token_type: string;
+    user_id: number;
 }
 
-interface loginAction {
-    type: ActionType.LOGIN;
+export enum ActionType {
+    LOADING = "LOADING",
+    STOP_LOADING = "STOP_LOADING",
+    ERROR = "ERROR",
+    LOGIN_SUCCESS = "LOGIN_SUCCESS",
+    VERIFY_SUCCESS = "VERIFY_SUCCESS",
+    DELETE_MESSAGES = "DELETE_MESSAGES",
+    DELETE_ERRORS = "DELETE_ERRORS",
+    LOGOUT = "LOGOUT",
+    MESSAGE = "MESSAGE"
+}
+
+interface loadingAction {
+    type: ActionType.LOADING;
+}
+interface stopLoadingAction {
+    type: ActionType.STOP_LOADING;
+}
+
+
+interface errorAction {
+    type: ActionType.ERROR;
+    payload: string;
+}
+interface messageAction {
+    type: ActionType.MESSAGE;
+    payload: string
 }
 
 interface loginActionSuccess {
     type: ActionType.LOGIN_SUCCESS;
     payload: string;
 }
-interface loginError {
-    type: ActionType.LOGIN_ERROR;
-}
-
-interface verifyAction {
-    type: ActionType.VERIFY
-}
 
 interface verifySuccessAction {
     type: ActionType.VERIFY_SUCCESS;
-    payload: string;
-}
-
-interface verifyErrorAction {
-    type: ActionType.VERIFY_ERROR
 }
 
 interface deleteMessagesAction {
@@ -48,5 +57,4 @@ interface logoutAction {
     type: ActionType.LOGOUT
 }
 
-export type Action = loginAction | loginActionSuccess | loginError | verifyAction
-    | verifySuccessAction | verifyErrorAction | deleteMessagesAction | deleteErrorsAction | logoutAction
+export type Action = loginActionSuccess | loadingAction | errorAction | verifySuccessAction | deleteMessagesAction | deleteErrorsAction | logoutAction | messageAction | stopLoadingAction

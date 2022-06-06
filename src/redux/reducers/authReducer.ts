@@ -19,34 +19,30 @@ const initialState = {
 
 export const authReducer = (state: State = initialState, action: Action): State => {
     switch (action.type) {
-        case ActionType.LOGIN:
+        case ActionType.LOADING:
             return {
                 ...state,
                 loading: true
+            }
+        case ActionType.STOP_LOADING:
+            return {
+                ...state,
+                loading: false
             }
         case ActionType.LOGIN_SUCCESS:
             return {
                 ...state,
-                loading: false,
                 access: action.payload,
-                message: "Successfully logged in!"
             }
-        case ActionType.LOGIN_ERROR:
+        case ActionType.ERROR:
             return {
                 ...state,
-                loading: false,
-                error: "Wrong password or Email"
-            }
-        case ActionType.VERIFY:
-            return {
-                ...state,
-                loading: true
+                error: action.payload,
             }
         case ActionType.VERIFY_SUCCESS:
             return {
                 ...state,
-                loading: true,
-                message: action.payload,
+                loading: false,
             }
         case ActionType.DELETE_MESSAGES:
             return {
@@ -63,6 +59,11 @@ export const authReducer = (state: State = initialState, action: Action): State 
                 ...state,
                 access: null,
                 refresh: null
+            }
+        case ActionType.MESSAGE:
+            return {
+                ...state,
+                message: action.payload,
             }
         default:
             return state;

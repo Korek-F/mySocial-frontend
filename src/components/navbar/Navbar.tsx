@@ -8,7 +8,9 @@ import "./../../css/main.css"
 
 export const Navbar = () => {
     const { access } = useTypedSelector(state => state.auth)
+    const { user } = useTypedSelector(state => state.user)
     const dispatch = useDispatch()
+
 
     const logoutOnClick = () => {
         dispatch(logout() as any)
@@ -22,6 +24,12 @@ export const Navbar = () => {
                         to="/"
                         onClick={logoutOnClick}
                     >Logout</Link>
+
+                    {user &&
+                        <Link
+                            className='navbar-link' to={"/profile/" + user.username}
+                        >My Profile</Link>
+                    }
                 </>
                 :
                 <>
@@ -29,6 +37,6 @@ export const Navbar = () => {
                     <Link className='navbar-link' to="/signup" >Registration</Link>
                 </>
             }
-        </div>
+        </div >
     )
 }

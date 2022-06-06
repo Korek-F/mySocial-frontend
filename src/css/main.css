@@ -39,10 +39,11 @@ a:visited {
 .post {
     -webkit-box-shadow: -1px 6px 44px -9px rgba(255, 255, 255, 1);
     -moz-box-shadow: -1px 6px 44px -9px rgba(255, 255, 255, 1);
-    box-shadow: -1px 6px 44px -9px rgba(255, 255, 255, 1);
+    box-shadow: -1px 6px 44px -9px rgb(70, 44, 100), inset -1px 6px 44px -9px rgb(70, 44, 100);
     margin: 2rem 0;
     padding: 1rem;
     border-radius: 0.4rem;
+    border-radius: 0 0 1rem 1rem;
 }
 
 .post_author {
