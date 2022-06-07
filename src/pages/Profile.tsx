@@ -5,12 +5,13 @@ import { Post } from '../components/posts/Post'
 import { BASE_URL } from '../constants/addresses'
 import { useTypedSelector } from '../hooks/useTypeSelector'
 import { getUserPosts } from '../redux/actionCreators/postActions'
-import { getOtherUserProfile } from '../redux/actionCreators/userActions'
+import { followAction, getOtherUserProfile } from '../redux/actionCreators/userActions'
 
 export const Profile = () => {
     const dispatch = useDispatch()
-    const { current_user } = useTypedSelector(state => state.user)
+    const { current_user, user } = useTypedSelector(state => state.user)
     const { profile_posts } = useTypedSelector(state => state.posts)
+    const { access } = useTypedSelector(state => state.auth)
     const { username } = useParams();
 
     useEffect(() => {
@@ -21,7 +22,11 @@ export const Profile = () => {
 
     }, [])
 
+    const followOnClick = () => {
+        dispatch(followAction(username || "TEST") as any)
 
+    }
+    console.log(current_user)
     return (
         <div className='user_profile_page'>
             <div className='profile_upper'>
@@ -37,9 +42,19 @@ export const Profile = () => {
                     <div className='profile_followers'>
                         Following: {current_user?.following} </div>
 
-                    <button>
-                        Follow
-                    </button>
+                    {(access && current_user?.username !== user?.username) &&
+                        <>
+                            {current_user?.is_followed_by_me ?
+                                <button onClick={followOnClick}>
+                                    Unfollow
+                                </button>
+                                :
+                                <button onClick={followOnClick}>
+                                    Follow
+                                </button>}
+                        </>
+
+                    }
                 </div>
             </div>
 
@@ -54,6 +69,6 @@ export const Profile = () => {
 
 
 
-        </div>
+        </div >
     )
 }

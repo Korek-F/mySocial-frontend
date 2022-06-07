@@ -2,7 +2,7 @@ import { Action, ActionType, ProfileInterface } from "../actionTypes/userTypes";
 
 interface State {
     user: ProfileInterface | null,
-    current_user: ProfileInterface | null,
+    current_user: ProfileInterface | any,
 
 }
 
@@ -22,6 +22,11 @@ export const userReducer = (state: State = initialState, action: Action): State 
             return {
                 ...state,
                 current_user: action.payload
+            }
+        case ActionType.FOLLOW_ACTION_SUCCESS:
+            return {
+                ...state,
+                current_user: { ...state.current_user, followers: action.payload.followers, is_followed_by_me: action.payload.follow }
             }
         default:
             return state;

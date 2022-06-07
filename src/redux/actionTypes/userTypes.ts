@@ -7,11 +7,17 @@ export type ProfileInterface = {
     created_at: string;
     avatar: string | null;
     cover: string | null;
+    is_followed_by_me: boolean;
 }
 
+export type FollowActionDataInterface = {
+    follow: boolean;
+    followers: string;
+}
 export enum ActionType {
     GET_USER_PROFILE_SUCCESS = "GET_USER_PROFILE_SUCCESS",
-    GET_OTHER_USER_PROFILE_SUCCESS = "GET_OTHER_USER_PROFILE_SUCCESS"
+    GET_OTHER_USER_PROFILE_SUCCESS = "GET_OTHER_USER_PROFILE_SUCCESS",
+    FOLLOW_ACTION_SUCCESS = "FOLLOW_ACTION_SUCCESS",
 }
 
 interface getUserProfleAction {
@@ -24,5 +30,9 @@ interface getOtherUserProfleAction {
     payload: ProfileInterface;
 }
 
+interface followAction {
+    type: ActionType.FOLLOW_ACTION_SUCCESS;
+    payload: FollowActionDataInterface;
+}
 
-export type Action = getUserProfleAction | getOtherUserProfleAction
+export type Action = getUserProfleAction | getOtherUserProfleAction | followAction
