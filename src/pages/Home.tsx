@@ -15,7 +15,7 @@ export const Home = () => {
     return (
         <div className='posts_container'>
             <PostFrom />
-            <h1> Posts</h1>
+            <h1> Postss</h1>
             {
                 posts.map(e =>
                     <Post key={e.id} postData={e} />
