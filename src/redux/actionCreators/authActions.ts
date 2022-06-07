@@ -54,6 +54,10 @@ export const verify = (token: string) => {
                 payload: "Verification successed, you can login now!"
             })
             dispatch({
+                type: ActionType.MESSAGE,
+                payload: "Verification successed!"
+            })
+            dispatch({
                 type: ActionType.STOP_LOADING
             })
 

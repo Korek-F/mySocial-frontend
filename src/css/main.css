@@ -26,13 +26,13 @@ a:visited {
 .main_content {
     background-color: rgb(40, 22, 83);
     color: #f3efd6;
-    height: 100vh;
+    min-height: 100vh;
     font-family: 'Oxygen', sans-serif;
 }
 
 .center_content {
-    width: 50%;
-    margin: 0 25%;
+    width: 60%;
+    margin: 0 20%;
     padding: 2rem;
 }
 
@@ -85,4 +85,40 @@ a:visited {
     color: white;
     text-decoration: none;
     display: flex;
+}
+
+.user_profile_page {
+    width: 100%;
+    border: 2px solid white;
+    padding: 2rem;
+
+}
+
+.profile_upper {
+    position: relative;
+}
+
+.profile_cover {
+    width: 100%;
+}
+
+.profile_avatar {
+    width: 25%;
+    background-color: white;
+    position: absolute;
+    left: 50%;
+    bottom: 0px;
+    transform: translate(-50%);
+    border: 2px solid rgb(70, 44, 100);
+    border-radius: 1rem;
+}
+
+.follow_panel {
+    display: flex;
+    justify-content: space-around;
+}
+
+.profile_username {
+    text-align: center;
+    font-size: 3rem;
 }

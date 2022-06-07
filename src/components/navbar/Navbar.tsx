@@ -15,6 +15,8 @@ export const Navbar = () => {
     const logoutOnClick = () => {
         dispatch(logout() as any)
     }
+
+
     return (
         <div className='main-navbar'>
             <Link className='navbar-link' to="/" >Main</Link>

@@ -5,6 +5,7 @@ export type TokenInterface = {
     jti: string;
     token_type: string;
     user_id: number;
+    user_username: string;
 }
 
 export enum ActionType {

@@ -18,16 +18,16 @@ import { TokenInterface } from "./redux/actionTypes/authTypes";
 
 function App() {
   const dispatch = useDispatch()
-  const { loading, error, message } = useTypedSelector(state => state.auth)
+  const { loading, error, message, access } = useTypedSelector(state => state.auth)
 
   useEffect(() => {
-    const access = localStorage.getItem("access")
-    if (access) {
-      const decoded_access = jwt_decode(access) as TokenInterface
-      dispatch(getUserProfile(decoded_access.user_id) as any)
+    const access_token = localStorage.getItem("access")
+    if (access_token) {
+      const decoded_access = jwt_decode(access_token) as TokenInterface
+      dispatch(getUserProfile(decoded_access.user_username) as any)
     }
+  }, [access])
 
-  }, [])
   return (
     <div className="main_content">
       <Router>

@@ -11,6 +11,7 @@ export type ProfileInterface = {
 
 export enum ActionType {
     GET_USER_PROFILE_SUCCESS = "GET_USER_PROFILE_SUCCESS",
+    GET_OTHER_USER_PROFILE_SUCCESS = "GET_OTHER_USER_PROFILE_SUCCESS"
 }
 
 interface getUserProfleAction {
@@ -18,5 +19,10 @@ interface getUserProfleAction {
     payload: ProfileInterface;
 }
 
+interface getOtherUserProfleAction {
+    type: ActionType.GET_OTHER_USER_PROFILE_SUCCESS;
+    payload: ProfileInterface;
+}
 
-export type Action = getUserProfleAction
+
+export type Action = getUserProfleAction | getOtherUserProfleAction
