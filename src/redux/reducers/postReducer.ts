@@ -22,6 +22,11 @@ export const postReducer = (state: State = initialState, action: Action): State 
                 ...state,
                 profile_posts: action.payload,
             }
+        case ActionType.SEND_POST_SUCCESS:
+            return {
+                ...state,
+                posts: [action.payload, ...state.posts]
+            }
         default:
             return state;
     }

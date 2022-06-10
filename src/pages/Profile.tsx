@@ -45,11 +45,12 @@ export const Profile = () => {
                     {(access && current_user?.username !== user?.username) &&
                         <>
                             {current_user?.is_followed_by_me ?
-                                <button onClick={followOnClick}>
+                                <button onClick={followOnClick} className="main_button">
                                     Unfollow
                                 </button>
                                 :
-                                <button onClick={followOnClick}>
+                                <button onClick={followOnClick}
+                                    className="main_button">
                                     Follow
                                 </button>}
                         </>

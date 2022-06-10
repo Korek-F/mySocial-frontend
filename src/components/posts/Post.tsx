@@ -17,14 +17,18 @@ export const Post: React.FC<PostProps> = ({ postData }) => {
         if (time > 60 * 24) {
             //older than a day
             if (time < 60 * 24 * 7) {
-                return `${Math.floor(time / 60 * 24)} days ago`
+                return `${Math.floor(time / (60 * 24))} days ago`
             } else {
                 return `More than a week ago`
             }
         } else {
             if (time > 60) {
                 return `${Math.floor(time / 60)} hours ago`
-            } else {
+
+            } else if (time < 1) {
+                return `Now`
+            }
+            else {
                 return `${Math.floor(time)} minutes ago`
             }
         }

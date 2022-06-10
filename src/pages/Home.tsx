@@ -12,6 +12,8 @@ export const Home = () => {
     useEffect(() => {
         dispatch(getPosts() as any)
     }, [])
+
+    console.log(posts)
     return (
         <div className='posts_container'>
             <PostFrom />
