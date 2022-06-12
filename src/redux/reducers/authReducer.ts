@@ -61,6 +61,7 @@ export const authReducer = (state: State = initialState, action: Action): State 
                 refresh: null
             }
         case ActionType.MESSAGE:
+            console.log("MESSAGE", action.payload)
             return {
                 ...state,
                 message: action.payload,

@@ -14,6 +14,7 @@ export const SuccessMessage: React.FC<MessageProps> = ({ message }) => {
         }, 3000)
     }, [])
 
+
     return (
         <div>{message}</div>
     )

@@ -53,6 +53,10 @@ export const sendPost = (title: string, body: string) => {
                 type: ActionType.SEND_POST_SUCCESS,
                 payload: res.data
             })
+            dispatch({
+                type: ActionType2.MESSAGE,
+                payload: "Post successfully added!"
+            })
             dispatch({ type: ActionType2.STOP_LOADING, })
         }
         catch (e) {

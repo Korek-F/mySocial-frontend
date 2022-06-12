@@ -35,9 +35,11 @@ export const PostFrom = () => {
 
                     <input type="text" className='post_form_title'
                         onChange={(e) => setTitle(e.target.value)}
+                        value={title}
                         placeholder="Title" maxLength={200} />
                     <textarea className='post_form_text'
                         onChange={(e) => setText(e.target.value)}
+                        value={text}
                         placeholder="What's up?" maxLength={1000} />
                     <button className='main_button' onClick={post}
                     >Publish</button>
