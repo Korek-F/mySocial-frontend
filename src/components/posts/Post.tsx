@@ -1,6 +1,8 @@
 import React from 'react'
+import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { BASE_URL } from '../../constants/addresses'
+import { deletePost } from '../../redux/actionCreators/postActions'
 import { PostInterface } from '../../redux/actionTypes/PostTypes'
 
 type PostProps = {
@@ -9,6 +11,7 @@ type PostProps = {
 }
 
 export const Post: React.FC<PostProps> = ({ postData }) => {
+    const dispatch = useDispatch()
 
     const getProperDate = () => {
         let date = new Date(postData.created).getTime() / 1000
@@ -35,14 +38,17 @@ export const Post: React.FC<PostProps> = ({ postData }) => {
 
     }
 
+    const deletePostClick = () => {
+        dispatch(deletePost(postData.id) as any)
+    }
 
     return (
         <div className='post'>
             <div className='post_author'>
                 <Link className='profile_link'
-                    to={"profile/" + postData.author.username}>
+                    to={"/profile/" + postData.author.username}>
                     <img className="post_author_image"
-                        src={BASE_URL + postData.author.avatar} />
+                        src={postData.author.avatar} />
                     <div className="post_author_username">
                         {postData.author.username}</div>
                 </Link>
@@ -53,6 +59,8 @@ export const Post: React.FC<PostProps> = ({ postData }) => {
             <div className='post_title'>{postData.title} </div>
 
             <div className='post_body'>{postData.body}</div>
+            {postData.am_i_author &&
+                <button onClick={deletePostClick}>Delete</button>}
         </div>
     )
 }

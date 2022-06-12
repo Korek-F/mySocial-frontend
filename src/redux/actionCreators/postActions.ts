@@ -9,7 +9,7 @@ export const getPosts = () => {
     return async (dispatch: Dispatch<Action | Action2>) => {
         dispatch({ type: ActionType2.LOADING, })
         try {
-            const res = await axios.get(`${BASE_URL}/blog/all-posts`)
+            const res = await axios.get(`${BASE_URL}/blog/posts`, { "headers": authHeader() })
             console.log(res.data)
             dispatch({
                 type: ActionType.GET_POSTS_SUCCESS,
@@ -28,7 +28,7 @@ export const getUserPosts = (username: string) => {
     return async (dispatch: Dispatch<Action | Action2>) => {
         dispatch({ type: ActionType2.LOADING, })
         try {
-            const res = await axios.get(`${BASE_URL}/blog/all-posts/${username}`)
+            const res = await axios.get(`${BASE_URL}/blog/user/${username}`, { "headers": authHeader() })
             console.log(res.data)
             dispatch({
                 type: ActionType.GET_USER_POSTS_SUCCESS,
@@ -47,7 +47,7 @@ export const sendPost = (title: string, body: string) => {
     return async (dispatch: Dispatch<Action | Action2>) => {
         dispatch({ type: ActionType2.LOADING })
         try {
-            const res = await axios.post(`${BASE_URL}/blog/all-posts`, { "title": title, "body": body }, { "headers": authHeader() })
+            const res = await axios.post(`${BASE_URL}/blog/posts`, { "title": title, "body": body }, { "headers": authHeader() })
             console.log(res.data)
             dispatch({
                 type: ActionType.SEND_POST_SUCCESS,
@@ -56,6 +56,29 @@ export const sendPost = (title: string, body: string) => {
             dispatch({
                 type: ActionType2.MESSAGE,
                 payload: "Post successfully added!"
+            })
+            dispatch({ type: ActionType2.STOP_LOADING, })
+        }
+        catch (e) {
+            console.log(e)
+            dispatch({ type: ActionType2.STOP_LOADING, })
+        }
+    }
+}
+
+export const deletePost = (id: number) => {
+    return async (dispatch: Dispatch<Action | Action2>) => {
+        dispatch({ type: ActionType2.LOADING })
+        try {
+            const res = await axios.delete(`${BASE_URL}/blog/post/${id}`, { "headers": authHeader() })
+            console.log(res.data)
+            dispatch({
+                type: ActionType.DELETE_POST_SUCCESS,
+                payload: id
+            })
+            dispatch({
+                type: ActionType2.MESSAGE,
+                payload: "Post successfully deleted!"
             })
             dispatch({ type: ActionType2.STOP_LOADING, })
         }

@@ -11,6 +11,7 @@ export type PostInterface = {
     title: string;
     body: string;
     created: string;
+    am_i_author: boolean;
 }
 
 
@@ -18,6 +19,7 @@ export enum ActionType {
     GET_POSTS_SUCCESS = "GET_POSTS_SUCCESS",
     GET_USER_POSTS_SUCCESS = "GET_USER_POSTS_SUCCESS",
     SEND_POST_SUCCESS = "SEND_POST_SUCCESS",
+    DELETE_POST_SUCCESS = "DELETE_POST_SUCCESS",
 }
 
 
@@ -36,4 +38,9 @@ interface sendPostSuccessAction {
     payload: PostInterface
 }
 
-export type Action = getPostsSuccessAction | getUserPostsSuccessAction | sendPostSuccessAction
+interface deletePostSuccessAction {
+    type: ActionType.DELETE_POST_SUCCESS,
+    payload: number
+}
+
+export type Action = getPostsSuccessAction | getUserPostsSuccessAction | sendPostSuccessAction | deletePostSuccessAction
