@@ -16,6 +16,6 @@ export const SuccessMessage: React.FC<MessageProps> = ({ message }) => {
 
 
     return (
-        <div>{message}</div>
+        <div className='success_message'>{message}</div>
     )
 }

@@ -33,6 +33,13 @@ export const postReducer = (state: State = initialState, action: Action): State 
                 ...state,
                 posts: [...state.posts.filter(e => e.id !== action.payload)]
             }
+        case ActionType.CHANGE_LIKE_STATUS:
+            return {
+                ...state,
+                posts: state.posts.map(post => post.id === action.payload.id ?
+                    { ...post, is_liked_by_me: action.payload.is_liked_by_me, likes: action.payload.likes } :
+                    post)
+            }
         default:
             return state;
     }

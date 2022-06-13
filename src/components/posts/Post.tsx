@@ -1,8 +1,8 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { BASE_URL } from '../../constants/addresses'
-import { deletePost } from '../../redux/actionCreators/postActions'
+import { HiHeart, HiOutlineHeart } from "react-icons/hi";
+import { changeLikeStatus, deletePost } from '../../redux/actionCreators/postActions'
 import { PostInterface } from '../../redux/actionTypes/PostTypes'
 
 type PostProps = {
@@ -42,6 +42,10 @@ export const Post: React.FC<PostProps> = ({ postData }) => {
         dispatch(deletePost(postData.id) as any)
     }
 
+    const likeOrDislike = () => {
+        dispatch(changeLikeStatus(postData.id) as any)
+    }
+
     return (
         <div className='post'>
             <div className='post_author'>
@@ -59,6 +63,13 @@ export const Post: React.FC<PostProps> = ({ postData }) => {
             <div className='post_title'>{postData.title} </div>
 
             <div className='post_body'>{postData.body}</div>
+            <div className='post_like'>
+                {postData.is_liked_by_me ?
+                    <HiHeart onClick={likeOrDislike} /> :
+                    <HiOutlineHeart onClick={likeOrDislike} />
+                }
+                {postData.likes}
+            </div>
             {postData.am_i_author &&
                 <button onClick={deletePostClick}>Delete</button>}
         </div>

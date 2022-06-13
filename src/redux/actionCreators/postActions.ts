@@ -88,3 +88,27 @@ export const deletePost = (id: number) => {
         }
     }
 }
+
+export const changeLikeStatus = (post_id: number) => {
+    return async (dispatch: Dispatch<Action | Action2>) => {
+        dispatch({ type: ActionType2.LOADING })
+        try {
+            const res = await axios.patch(`${BASE_URL}/blog/post/like-dislike`,
+                { "id": post_id }, { "headers": authHeader() })
+            console.log(res.data)
+            dispatch({
+                type: ActionType.CHANGE_LIKE_STATUS,
+                payload: res.data
+            })
+            dispatch({
+                type: ActionType2.MESSAGE,
+                payload: "Successed"
+            })
+            dispatch({ type: ActionType2.STOP_LOADING, })
+        }
+        catch (e) {
+            console.log(e)
+            dispatch({ type: ActionType2.STOP_LOADING, })
+        }
+    }
+}
