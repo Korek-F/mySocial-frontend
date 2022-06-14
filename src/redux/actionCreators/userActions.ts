@@ -73,6 +73,12 @@ export const editUser = (data: UpdateUserInterface) => {
             dispatch({ type: ActionType2.MESSAGE, payload: "Successfully editted!" })
 
             dispatch({ type: ActionType2.STOP_LOADING, })
+
+            dispatch({
+                type: ActionType.GET_USER_PROFILE_SUCCESS,
+                payload: res.data
+            })
+            console.log("RESPONSE", res.data)
         }
         catch (e) {
             console.log(e)

@@ -14,6 +14,7 @@ const initialState = {
 export const userReducer = (state: State = initialState, action: Action): State => {
     switch (action.type) {
         case ActionType.GET_USER_PROFILE_SUCCESS:
+            console.log("REDUCER", action.payload)
             return {
                 ...state,
                 user: action.payload

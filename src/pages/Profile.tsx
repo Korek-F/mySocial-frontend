@@ -22,7 +22,7 @@ export const Profile = () => {
             dispatch(getUserPosts(username) as any)
         }
 
-    }, [username])
+    }, [username, edit])
 
     const followOnClick = () => {
         dispatch(followAction(username || "TEST") as any)
