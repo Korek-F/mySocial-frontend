@@ -1,7 +1,8 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { useParams } from 'react-router'
 import { Post } from '../components/posts/Post'
+import { EditModal } from '../components/profile/EditModal'
 import { BASE_URL } from '../constants/addresses'
 import { useTypedSelector } from '../hooks/useTypeSelector'
 import { getUserPosts } from '../redux/actionCreators/postActions'
@@ -13,6 +14,7 @@ export const Profile = () => {
     const { profile_posts } = useTypedSelector(state => state.posts)
     const { access } = useTypedSelector(state => state.auth)
     const { username } = useParams();
+    const [edit, setEdit] = useState(false)
 
     useEffect(() => {
         if (username) {
@@ -29,6 +31,8 @@ export const Profile = () => {
     console.log(current_user)
     return (
         <div className='user_profile_page'>
+            {edit && <EditModal setEdit={setEdit} />}
+
             <div className='profile_upper'>
                 <img className="profile_cover" src={current_user?.cover!} />
                 <img className="profile_avatar" src={current_user?.avatar!} />
@@ -41,6 +45,13 @@ export const Profile = () => {
                         Followers: {current_user?.followers} </div>
                     <div className='profile_followers'>
                         Following: {current_user?.following} </div>
+
+                    {current_user?.username === user?.username && <>
+                        <button className="main_button"
+                            onClick={() => setEdit(!edit)}>
+                            Edit
+                        </button>
+                    </>}
 
                     {(access && current_user?.username !== user?.username) &&
                         <>

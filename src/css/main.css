@@ -219,3 +219,11 @@ a:visited {
         transform: rotate(360deg);
     }
 }
+
+.edit_profile_modal {
+    width: 53%;
+    height: 70vh;
+    background-color: rgba(0, 0, 0, 0.87);
+    position: fixed;
+    z-index: 55;
+}

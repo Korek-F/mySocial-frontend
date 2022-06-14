@@ -2,6 +2,7 @@
 export type UserLessInfoInterface = {
     username: string;
     avatar: string;
+    name: string | null;
 }
 
 

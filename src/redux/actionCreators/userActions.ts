@@ -1,6 +1,6 @@
 import { Dispatch } from "react"
 import { BASE_URL } from "../../constants/addresses"
-import { Action, ActionType } from "../actionTypes/userTypes"
+import { Action, ActionType, UpdateUserInterface } from "../actionTypes/userTypes"
 import { Action as Action2, ActionType as ActionType2 } from "../actionTypes/authTypes"
 import axios from 'axios';
 import authHeader from "../../utils/authHeaders";
@@ -64,3 +64,19 @@ export const followAction = (username: string) => {
     }
 }
 
+export const editUser = (data: UpdateUserInterface) => {
+    return async (dispatch: Dispatch<Action | Action2>) => {
+        dispatch({ type: ActionType2.LOADING })
+        try {
+            const res = await axios.patch(`${BASE_URL}/auth/edit-user/`, data, { "headers": authHeader() })
+            console.log(res.data)
+            dispatch({ type: ActionType2.MESSAGE, payload: "Successfully editted!" })
+
+            dispatch({ type: ActionType2.STOP_LOADING, })
+        }
+        catch (e) {
+            console.log(e)
+            dispatch({ type: ActionType2.STOP_LOADING, })
+        }
+    }
+}

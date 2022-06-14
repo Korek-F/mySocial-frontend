@@ -54,7 +54,11 @@ export const Post: React.FC<PostProps> = ({ postData }) => {
                     <img className="post_author_image"
                         src={postData.author.avatar} />
                     <div className="post_author_username">
-                        {postData.author.username}</div>
+                        {postData.author.name ?
+                            <>{postData.author.name} ({postData.author.username})</> :
+                            <> {postData.author.username}</>
+                        }
+                    </div>
                 </Link>
                 <div className="post_date">
                     {getProperDate()}</div>
