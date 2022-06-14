@@ -50,7 +50,6 @@ export const followAction = (username: string) => {
             const res = await axios.post(`${BASE_URL}/auth/follow-action/`, { "username": username }, { "headers": authHeader() }
             )
 
-            console.log(res.data)
             dispatch({
                 type: ActionType.FOLLOW_ACTION_SUCCESS,
                 payload: res.data
@@ -69,7 +68,7 @@ export const editUser = (data: UpdateUserInterface) => {
         dispatch({ type: ActionType2.LOADING })
         try {
             const res = await axios.patch(`${BASE_URL}/auth/edit-user/`, data, { "headers": authHeader() })
-            console.log(res.data)
+
             dispatch({ type: ActionType2.MESSAGE, payload: "Successfully editted!" })
 
             dispatch({ type: ActionType2.STOP_LOADING, })
@@ -78,7 +77,7 @@ export const editUser = (data: UpdateUserInterface) => {
                 type: ActionType.GET_USER_PROFILE_SUCCESS,
                 payload: res.data
             })
-            console.log("RESPONSE", res.data)
+
         }
         catch (e) {
             console.log(e)
