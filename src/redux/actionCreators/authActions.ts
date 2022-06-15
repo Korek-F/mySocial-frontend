@@ -1,5 +1,6 @@
 import { Dispatch } from 'redux';
 import { Action, ActionType } from '../actionTypes/authTypes';
+import { Action as Action2, ActionType as ActionType2 } from '../actionTypes/userTypes';
 import axios from 'axios';
 import { BASE_URL } from '../../constants/addresses';
 
@@ -33,6 +34,33 @@ export const login = (username: string, password: string) => {
                 type: ActionType.ERROR,
                 payload: "Cannot login!"
             })
+            dispatch({
+                type: ActionType.STOP_LOADING
+            })
+        }
+    }
+}
+
+
+export const register = (email: string, username: string, password: string) => {
+    return async (dispatch: Dispatch<Action>) => {
+        dispatch({
+            type: ActionType.LOADING
+        })
+        try {
+            await axios.post(`${BASE_URL}/auth/registration/`, {
+                "email": email, "username": username, "password": password
+            })
+            dispatch({
+                type: ActionType.MESSAGE,
+                payload: "Registartion successed! Check your email now."
+            })
+            dispatch({
+                type: ActionType.STOP_LOADING
+            })
+        }
+        catch (e) {
+            console.log("E", e)
             dispatch({
                 type: ActionType.STOP_LOADING
             })
@@ -75,8 +103,9 @@ export const verify = (token: string) => {
     }
 }
 
-export const logout = () => (dispatch: Dispatch<Action>) => {
+export const logout = () => (dispatch: Dispatch<Action | Action2>) => {
     dispatch({ type: ActionType.LOGOUT })
+    dispatch({ type: ActionType2.GET_USER_PROFILE_SUCCESS, payload: null })
     localStorage.removeItem("access");
     localStorage.removeItem("refresh");
 }

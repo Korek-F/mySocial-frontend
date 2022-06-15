@@ -17,7 +17,8 @@ export enum ActionType {
     DELETE_MESSAGES = "DELETE_MESSAGES",
     DELETE_ERRORS = "DELETE_ERRORS",
     LOGOUT = "LOGOUT",
-    MESSAGE = "MESSAGE"
+    MESSAGE = "MESSAGE",
+    REGISTER = "REGISTER"
 }
 
 interface loadingAction {
@@ -58,4 +59,8 @@ interface logoutAction {
     type: ActionType.LOGOUT
 }
 
-export type Action = loginActionSuccess | loadingAction | errorAction | verifySuccessAction | deleteMessagesAction | deleteErrorsAction | logoutAction | messageAction | stopLoadingAction
+interface registerAction {
+    type: ActionType.REGISTER
+}
+
+export type Action = loginActionSuccess | loadingAction | errorAction | verifySuccessAction | deleteMessagesAction | deleteErrorsAction | logoutAction | messageAction | stopLoadingAction | registerAction

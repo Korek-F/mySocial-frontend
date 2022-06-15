@@ -20,7 +20,7 @@ export const PostFrom = () => {
     }
     return (
         <>
-            {user ?
+            {user &&
                 <div className='post_form'>
                     <div className='post_author'>
 
@@ -44,8 +44,7 @@ export const PostFrom = () => {
                     <button className='main_button' onClick={post}
                     >Publish</button>
                 </div>
-                :
-                <div>login</div>
+
             }
         </>
     )

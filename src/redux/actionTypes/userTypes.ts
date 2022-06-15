@@ -30,7 +30,7 @@ export enum ActionType {
 
 interface getUserProfleAction {
     type: ActionType.GET_USER_PROFILE_SUCCESS;
-    payload: ProfileInterface;
+    payload: ProfileInterface | null;
 }
 
 interface getOtherUserProfleAction {
