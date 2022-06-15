@@ -35,6 +35,7 @@ export const authReducer = (state: State = initialState, action: Action): State 
                 access: action.payload,
             }
         case ActionType.ERROR:
+            console.log("ERROR_MESSAGE", action.payload)
             return {
                 ...state,
                 error: action.payload,

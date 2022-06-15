@@ -4,22 +4,25 @@ import { Action, ActionType } from "../actionTypes/PostTypes"
 import { Action as Action2, ActionType as ActionType2 } from "../actionTypes/authTypes"
 import axios from 'axios';
 import authHeader from "../../utils/authHeaders";
+import { getErrors } from "../../utils/getErrors";
 
 export const getPosts = () => {
     return async (dispatch: Dispatch<Action | Action2>) => {
         dispatch({ type: ActionType2.LOADING, })
         try {
             const res = await axios.get(`${BASE_URL}/blog/posts`, { "headers": authHeader() })
-            console.log(res.data)
             dispatch({
                 type: ActionType.GET_POSTS_SUCCESS,
-                payload: res.data
+                payload: res.data.data
             })
             dispatch({ type: ActionType2.STOP_LOADING, })
         }
         catch (e) {
-            console.log(e)
             dispatch({ type: ActionType2.STOP_LOADING, })
+            dispatch({
+                type: ActionType2.ERROR,
+                payload: getErrors(e)
+            })
         }
     }
 }
@@ -37,8 +40,11 @@ export const getUserPosts = (username: string) => {
             dispatch({ type: ActionType2.STOP_LOADING, })
         }
         catch (e) {
-            console.log(e)
             dispatch({ type: ActionType2.STOP_LOADING, })
+            dispatch({
+                type: ActionType2.ERROR,
+                payload: getErrors(e)
+            })
         }
     }
 }
@@ -48,7 +54,6 @@ export const sendPost = (title: string, body: string) => {
         dispatch({ type: ActionType2.LOADING })
         try {
             const res = await axios.post(`${BASE_URL}/blog/posts`, { "title": title, "body": body }, { "headers": authHeader() })
-            console.log(res.data)
             dispatch({
                 type: ActionType.SEND_POST_SUCCESS,
                 payload: res.data
@@ -60,8 +65,11 @@ export const sendPost = (title: string, body: string) => {
             dispatch({ type: ActionType2.STOP_LOADING, })
         }
         catch (e) {
-            console.log(e)
             dispatch({ type: ActionType2.STOP_LOADING, })
+            dispatch({
+                type: ActionType2.ERROR,
+                payload: getErrors(e)
+            })
         }
     }
 }
@@ -71,7 +79,6 @@ export const deletePost = (id: number) => {
         dispatch({ type: ActionType2.LOADING })
         try {
             const res = await axios.delete(`${BASE_URL}/blog/post/${id}`, { "headers": authHeader() })
-            console.log(res.data)
             dispatch({
                 type: ActionType.DELETE_POST_SUCCESS,
                 payload: id
@@ -83,8 +90,11 @@ export const deletePost = (id: number) => {
             dispatch({ type: ActionType2.STOP_LOADING, })
         }
         catch (e) {
-            console.log(e)
             dispatch({ type: ActionType2.STOP_LOADING, })
+            dispatch({
+                type: ActionType2.ERROR,
+                payload: getErrors(e)
+            })
         }
     }
 }
@@ -95,7 +105,6 @@ export const changeLikeStatus = (post_id: number) => {
         try {
             const res = await axios.patch(`${BASE_URL}/blog/post/like-dislike`,
                 { "id": post_id }, { "headers": authHeader() })
-            console.log(res.data)
             dispatch({
                 type: ActionType.CHANGE_LIKE_STATUS,
                 payload: res.data
@@ -107,8 +116,11 @@ export const changeLikeStatus = (post_id: number) => {
             dispatch({ type: ActionType2.STOP_LOADING, })
         }
         catch (e) {
-            console.log(e)
             dispatch({ type: ActionType2.STOP_LOADING, })
+            dispatch({
+                type: ActionType2.ERROR,
+                payload: getErrors(e)
+            })
         }
     }
 }

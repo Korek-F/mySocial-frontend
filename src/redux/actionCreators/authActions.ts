@@ -3,6 +3,7 @@ import { Action, ActionType } from '../actionTypes/authTypes';
 import { Action as Action2, ActionType as ActionType2 } from '../actionTypes/userTypes';
 import axios from 'axios';
 import { BASE_URL } from '../../constants/addresses';
+import { getErrors } from '../../utils/getErrors';
 
 export const login = (username: string, password: string) => {
     return async (dispatch: Dispatch<Action>) => {
@@ -29,10 +30,9 @@ export const login = (username: string, password: string) => {
             localStorage.setItem("refresh", res.data.refresh)
         }
         catch (e) {
-            console.log(e)
             dispatch({
                 type: ActionType.ERROR,
-                payload: "Cannot login!"
+                payload: getErrors(e)
             })
             dispatch({
                 type: ActionType.STOP_LOADING
@@ -60,10 +60,14 @@ export const register = (email: string, username: string, password: string) => {
             })
         }
         catch (e) {
-            console.log("E", e)
+            dispatch({
+                type: ActionType.ERROR,
+                payload: getErrors(e)
+            })
             dispatch({
                 type: ActionType.STOP_LOADING
             })
+
         }
     }
 }
@@ -94,7 +98,7 @@ export const verify = (token: string) => {
             console.log("E", e)
             dispatch({
                 type: ActionType.ERROR,
-                payload: "Invalid Token or something went wrong!"
+                payload: getErrors(e)
             })
             dispatch({
                 type: ActionType.STOP_LOADING

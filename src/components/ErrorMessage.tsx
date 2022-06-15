@@ -15,6 +15,6 @@ export const ErrorMessage: React.FC<ErrorProps> = ({ error }) => {
     }, [])
 
     return (
-        <div>{error}</div>
+        <div className='error_message'>{error}</div>
     )
 }

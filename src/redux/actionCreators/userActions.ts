@@ -4,6 +4,7 @@ import { Action, ActionType, UpdateUserInterface } from "../actionTypes/userType
 import { Action as Action2, ActionType as ActionType2 } from "../actionTypes/authTypes"
 import axios from 'axios';
 import authHeader from "../../utils/authHeaders";
+import { getErrors } from "../../utils/getErrors";
 
 export const getUserProfile = (username: string) => {
     return async (dispatch: Dispatch<Action | Action2>) => {
@@ -18,7 +19,10 @@ export const getUserProfile = (username: string) => {
             dispatch({ type: ActionType2.STOP_LOADING, })
         }
         catch (e) {
-            console.log(e)
+            dispatch({
+                type: ActionType2.ERROR,
+                payload: getErrors(e)
+            })
             dispatch({ type: ActionType2.STOP_LOADING, })
         }
     }
@@ -37,7 +41,10 @@ export const getOtherUserProfile = (username: string) => {
             dispatch({ type: ActionType2.STOP_LOADING, })
         }
         catch (e) {
-            console.log(e)
+            dispatch({
+                type: ActionType2.ERROR,
+                payload: getErrors(e)
+            })
             dispatch({ type: ActionType2.STOP_LOADING, })
         }
     }
@@ -57,7 +64,10 @@ export const followAction = (username: string) => {
             dispatch({ type: ActionType2.STOP_LOADING, })
         }
         catch (e) {
-            console.log(e)
+            dispatch({
+                type: ActionType2.ERROR,
+                payload: getErrors(e)
+            })
             dispatch({ type: ActionType2.STOP_LOADING, })
         }
     }
@@ -80,8 +90,11 @@ export const editUser = (data: UpdateUserInterface) => {
 
         }
         catch (e) {
-            console.log(e)
             dispatch({ type: ActionType2.STOP_LOADING, })
+            dispatch({
+                type: ActionType2.ERROR,
+                payload: getErrors(e)
+            })
         }
     }
 }

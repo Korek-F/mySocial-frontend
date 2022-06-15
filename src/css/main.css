@@ -4,6 +4,7 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    word-break: break-word;
 }
 
 a:visited {
@@ -191,13 +192,22 @@ a:visited {
 
 }
 
-.success_message {
+.success_message,
+.error_message {
     position: fixed;
     right: 2rem;
     bottom: 3rem;
-    background-color: aquamarine;
     padding: 1rem;
 }
+
+.success_message {
+    background-color: rgb(0, 119, 0);
+}
+
+.error_message {
+    background-color: rgb(175, 0, 0);
+}
+
 
 .loading {
     position: fixed;
@@ -257,4 +267,13 @@ a:visited {
     font-size: 3rem;
     position: absolute;
     right: 1rem
+}
+
+.like-icon {
+    font-size: 2rem;
+}
+
+.like-count {
+    font-size: 2rem;
+    padding: 0.5rem;
 }

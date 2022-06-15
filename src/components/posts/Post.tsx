@@ -69,13 +69,15 @@ export const Post: React.FC<PostProps> = ({ postData }) => {
             <div className='post_body'>{postData.body}</div>
             <div className='post_like'>
                 {postData.is_liked_by_me ?
-                    <HiHeart onClick={likeOrDislike} /> :
-                    <HiOutlineHeart onClick={likeOrDislike} />
+                    <HiHeart className="like-icon" onClick={likeOrDislike} /> :
+                    <HiOutlineHeart className="like-icon" onClick={likeOrDislike} />
                 }
-                {postData.likes}
+                {postData.likes > 0 &&
+                    <span className='like-count'>{postData.likes}</span>
+                }
             </div>
             {postData.am_i_author &&
-                <button onClick={deletePostClick}>Delete</button>}
+                <button className="main_button" onClick={deletePostClick}>Delete</button>}
         </div>
     )
 }

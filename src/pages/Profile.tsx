@@ -28,7 +28,6 @@ export const Profile = () => {
         dispatch(followAction(username || "TEST") as any)
 
     }
-    console.log(current_user)
     return (
         <div className='user_profile_page'>
             {edit && <EditModal setEdit={setEdit} />}
