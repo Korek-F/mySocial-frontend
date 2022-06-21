@@ -1,13 +1,16 @@
-import { Action, ActionType, PostInterface } from "../actionTypes/PostTypes"
+
+import { Action, ActionType, PostInterface, PostMetaInterface } from "../actionTypes/PostTypes"
 
 interface State {
     posts: PostInterface[],
     profile_posts: PostInterface[],
+    posts_meta: PostMetaInterface | null,
 }
 
 const initialState = {
     posts: [],
-    profile_posts: []
+    profile_posts: [],
+    posts_meta: null,
 }
 
 export const postReducer = (state: State = initialState, action: Action): State => {
@@ -16,6 +19,16 @@ export const postReducer = (state: State = initialState, action: Action): State 
             return {
                 ...state,
                 posts: action.payload,
+            }
+        case ActionType.GET_POSTS_META_SUCCESS:
+            return {
+                ...state,
+                posts_meta: action.payload,
+            }
+        case ActionType.LOAD_MORE_POSTS:
+            return {
+                ...state,
+                posts: [...state.posts, ...action.payload]
             }
         case ActionType.GET_USER_POSTS_SUCCESS:
             return {

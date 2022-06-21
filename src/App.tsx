@@ -15,6 +15,7 @@ import { Signup } from "./pages/Signup";
 import { getUserProfile } from "./redux/actionCreators/userActions";
 import jwt_decode from 'jwt-decode'
 import { TokenInterface } from "./redux/actionTypes/authTypes";
+import { Post } from "./pages/Post";
 
 function App() {
   const dispatch = useDispatch()
@@ -39,6 +40,7 @@ function App() {
             <Route path="/signup" element={<Signup />} />
             <Route path="/activate/:token" element={<Activate />} />
             <Route path="/profile/:username" element={<Profile />} />
+            <Route path="/post/:id" element={<Post />} />
           </Routes>
         </div>
         {loading && <Loading />}

@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom'
 import { HiHeart, HiOutlineHeart } from "react-icons/hi";
 import { changeLikeStatus, deletePost } from '../../redux/actionCreators/postActions'
 import { PostInterface } from '../../redux/actionTypes/PostTypes'
+import { Comment } from './Comment';
+import { getProperDate } from '../../utils/getProperDate';
 
 type PostProps = {
     postData: PostInterface,
@@ -13,30 +15,7 @@ type PostProps = {
 export const Post: React.FC<PostProps> = ({ postData }) => {
     const dispatch = useDispatch()
 
-    const getProperDate = () => {
-        let date = new Date(postData.created).getTime() / 1000
-        let now = new Date().getTime() / 1000
-        let time = (now - date) / 60
-        if (time > 60 * 24) {
-            //older than a day
-            if (time < 60 * 24 * 7) {
-                return `${Math.floor(time / (60 * 24))} days ago`
-            } else {
-                return `More than a week ago`
-            }
-        } else {
-            if (time > 60) {
-                return `${Math.floor(time / 60)} hours ago`
 
-            } else if (time < 1) {
-                return `Now`
-            }
-            else {
-                return `${Math.floor(time)} minutes ago`
-            }
-        }
-
-    }
 
     const deletePostClick = () => {
         dispatch(deletePost(postData.id) as any)
@@ -61,7 +40,7 @@ export const Post: React.FC<PostProps> = ({ postData }) => {
                     </div>
                 </Link>
                 <div className="post_date">
-                    {getProperDate()}</div>
+                    {getProperDate(postData)}</div>
             </div>
 
             <div className='post_title'>{postData.title} </div>
@@ -78,6 +57,9 @@ export const Post: React.FC<PostProps> = ({ postData }) => {
             </div>
             {postData.am_i_author &&
                 <button className="main_button" onClick={deletePostClick}>Delete</button>}
+            {postData.most_popular_comment &&
+                <Comment key={postData.most_popular_comment.id}
+                    comment={postData.most_popular_comment} />}
         </div>
     )
 }

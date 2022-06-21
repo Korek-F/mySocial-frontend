@@ -6,14 +6,26 @@ import axios from 'axios';
 import authHeader from "../../utils/authHeaders";
 import { getErrors } from "../../utils/getErrors";
 
-export const getPosts = () => {
+export const getPosts = (page = 1) => {
     return async (dispatch: Dispatch<Action | Action2>) => {
         dispatch({ type: ActionType2.LOADING, })
         try {
-            const res = await axios.get(`${BASE_URL}/blog/posts`, { "headers": authHeader() })
+            const res = await axios.get(`${BASE_URL}/blog/posts?page=${page}`, { "headers": authHeader() })
+            if (page > 1) {
+                dispatch({
+                    type: ActionType.LOAD_MORE_POSTS,
+                    payload: res.data.data
+                })
+            } else {
+                dispatch({
+                    type: ActionType.GET_POSTS_SUCCESS,
+                    payload: res.data.data
+                })
+            }
+
             dispatch({
-                type: ActionType.GET_POSTS_SUCCESS,
-                payload: res.data.data
+                type: ActionType.GET_POSTS_META_SUCCESS,
+                payload: res.data.meta
             })
             dispatch({ type: ActionType2.STOP_LOADING, })
         }
