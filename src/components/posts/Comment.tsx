@@ -15,10 +15,17 @@ export const Comment: React.FC<CommentProps> = ({ comment }) => {
             <div className='comment_author'>
                 <Link className='profile_link'
                     to={"/profile/" + comment.author.username}>
-                    {comment.author.username}
-                    <br />
-                    {getProperDate(comment)}
+                    <img className="post_author_image"
+                        src={comment.author.avatar} />
+
+                    <div className="post_author_username">
+                        {comment.author.name ?
+                            <>{comment.author.name} ({comment.author.username})</> :
+                            <> {comment.author.username}</>
+                        }
+                    </div>
                 </Link>
+                <div className="post_date">{getProperDate(comment)}</div>
             </div>
             {comment.content}
         </div>

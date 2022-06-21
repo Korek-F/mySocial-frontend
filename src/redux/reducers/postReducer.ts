@@ -1,16 +1,18 @@
 
-import { Action, ActionType, PostInterface, PostMetaInterface } from "../actionTypes/PostTypes"
+import { Action, ActionType, PostInterface, PostMetaInterface, PostFullDataInterface } from "../actionTypes/PostTypes"
 
 interface State {
     posts: PostInterface[],
     profile_posts: PostInterface[],
     posts_meta: PostMetaInterface | null,
+    current_post: PostFullDataInterface | null,
 }
 
 const initialState = {
     posts: [],
     profile_posts: [],
     posts_meta: null,
+    current_post: null
 }
 
 export const postReducer = (state: State = initialState, action: Action): State => {
@@ -55,6 +57,14 @@ export const postReducer = (state: State = initialState, action: Action): State 
                 profile_posts: state.profile_posts.map(post => post.id === action.payload.id ?
                     { ...post, is_liked_by_me: action.payload.is_liked_by_me, likes: action.payload.likes } :
                     post),
+
+
+
+            }
+        case ActionType.GET_FULL_DATA_POST:
+            return {
+                ...state,
+                current_post: action.payload
             }
         default:
             return state;

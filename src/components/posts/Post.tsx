@@ -26,6 +26,7 @@ export const Post: React.FC<PostProps> = ({ postData }) => {
     }
 
     return (
+
         <div className='post'>
             <div className='post_author'>
                 <Link className='profile_link'
@@ -42,10 +43,13 @@ export const Post: React.FC<PostProps> = ({ postData }) => {
                 <div className="post_date">
                     {getProperDate(postData)}</div>
             </div>
+            <Link className='post_link'
+                to={"/post/" + postData.id}>
+                <div className='post_title'>{postData.title} </div>
 
-            <div className='post_title'>{postData.title} </div>
-
-            <div className='post_body'>{postData.body}</div>
+                <div className='post_body'>{postData.body}</div>
+            </Link>
+            //To doo
             <div className='post_like'>
                 {postData.is_liked_by_me ?
                     <HiHeart className="like-icon" onClick={likeOrDislike} /> :
@@ -61,5 +65,6 @@ export const Post: React.FC<PostProps> = ({ postData }) => {
                 <Comment key={postData.most_popular_comment.id}
                     comment={postData.most_popular_comment} />}
         </div>
+
     )
 }

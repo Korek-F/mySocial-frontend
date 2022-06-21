@@ -136,3 +136,23 @@ export const changeLikeStatus = (post_id: number) => {
         }
     }
 }
+
+export const getPostDetails = (post_id: string) => {
+    return async (dispatch: Dispatch<Action | Action2>) => {
+        dispatch({ type: ActionType2.LOADING })
+
+        try {
+            const res = await axios.get(`${BASE_URL}/blog/post/${post_id}/details`, { "headers": authHeader() })
+            console.log("DETAIL", res)
+            dispatch({ type: ActionType.GET_FULL_DATA_POST, payload: res.data })
+            dispatch({ type: ActionType2.STOP_LOADING, })
+        }
+        catch (e) {
+            dispatch({ type: ActionType2.STOP_LOADING, })
+            dispatch({
+                type: ActionType2.ERROR,
+                payload: getErrors(e)
+            })
+        }
+    }
+}
