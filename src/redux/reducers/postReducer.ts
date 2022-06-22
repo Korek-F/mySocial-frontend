@@ -1,22 +1,36 @@
 
-import { Action, ActionType, PostInterface, PostMetaInterface, PostFullDataInterface } from "../actionTypes/PostTypes"
+import { Action, ActionType, PostInterface, PostMetaInterface, CommentInterface } from "../actionTypes/PostTypes"
 
 interface State {
     posts: PostInterface[],
     profile_posts: PostInterface[],
     posts_meta: PostMetaInterface | null,
-    current_post: PostFullDataInterface | null,
+    current_post_comments: CommentInterface[] | null,
+    post: PostInterface | null,
 }
 
 const initialState = {
     posts: [],
     profile_posts: [],
     posts_meta: null,
-    current_post: null
+    post: null,
+    current_post_comments: null
 }
 
 export const postReducer = (state: State = initialState, action: Action): State => {
     switch (action.type) {
+        case ActionType.GET_POST_COMMENTS:
+            return {
+                ...state,
+                current_post_comments: action.payload
+            }
+        case ActionType.GET_POST:
+            return {
+                ...state,
+                post: action.payload
+            }
+
+
         case ActionType.GET_POSTS_SUCCESS:
             return {
                 ...state,
@@ -32,11 +46,13 @@ export const postReducer = (state: State = initialState, action: Action): State 
                 ...state,
                 posts: [...state.posts, ...action.payload]
             }
+
         case ActionType.GET_USER_POSTS_SUCCESS:
             return {
                 ...state,
                 profile_posts: action.payload,
             }
+
         case ActionType.SEND_POST_SUCCESS:
             return {
                 ...state,
@@ -46,26 +62,18 @@ export const postReducer = (state: State = initialState, action: Action): State 
             console.log(action.payload)
             return {
                 ...state,
-                posts: [...state.posts.filter(e => e.id !== action.payload)]
+                posts: [...state.posts.filter(e => e.id !== action.payload)],
+                profile_posts: [...state.profile_posts.filter(e => e.id !== action.payload)]
             }
         case ActionType.CHANGE_LIKE_STATUS:
             return {
                 ...state,
                 posts: state.posts.map(post => post.id === action.payload.id ?
-                    { ...post, is_liked_by_me: action.payload.is_liked_by_me, likes: action.payload.likes } :
-                    post),
-                profile_posts: state.profile_posts.map(post => post.id === action.payload.id ?
-                    { ...post, is_liked_by_me: action.payload.is_liked_by_me, likes: action.payload.likes } :
-                    post),
-
-
-
+                    action.payload : post),
+                profile_posts: state.profile_posts.map(post => post.id === action.payload.id ? action.payload : post),
+                post: action.payload,
             }
-        case ActionType.GET_FULL_DATA_POST:
-            return {
-                ...state,
-                current_post: action.payload
-            }
+
         default:
             return state;
     }

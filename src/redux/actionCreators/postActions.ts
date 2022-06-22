@@ -90,7 +90,7 @@ export const deletePost = (id: number) => {
     return async (dispatch: Dispatch<Action | Action2>) => {
         dispatch({ type: ActionType2.LOADING })
         try {
-            const res = await axios.delete(`${BASE_URL}/blog/post/${id}`, { "headers": authHeader() })
+            const res = await axios.delete(`${BASE_URL}/blog/post-delete/${id}`, { "headers": authHeader() })
             dispatch({
                 type: ActionType.DELETE_POST_SUCCESS,
                 payload: id
@@ -137,14 +137,15 @@ export const changeLikeStatus = (post_id: number) => {
     }
 }
 
-export const getPostDetails = (post_id: string) => {
+export const getPostComments = (post_id: string) => {
     return async (dispatch: Dispatch<Action | Action2>) => {
         dispatch({ type: ActionType2.LOADING })
 
         try {
             const res = await axios.get(`${BASE_URL}/blog/post/${post_id}/details`, { "headers": authHeader() })
-            console.log("DETAIL", res)
-            dispatch({ type: ActionType.GET_FULL_DATA_POST, payload: res.data })
+            console.log("COMMENTS", res)
+
+            dispatch({ type: ActionType.GET_POST_COMMENTS, payload: res.data })
             dispatch({ type: ActionType2.STOP_LOADING, })
         }
         catch (e) {
@@ -156,3 +157,23 @@ export const getPostDetails = (post_id: string) => {
         }
     }
 }
+
+export const getPost = (post_id: string) => {
+    return async (dispatch: Dispatch<Action | Action2>) => {
+        dispatch({ type: ActionType2.LOADING })
+        try {
+            const res = await axios.get(`${BASE_URL}/blog/post/${post_id}/`, { "headers": authHeader() })
+            console.log("POST", res)
+            dispatch({ type: ActionType.GET_POST, payload: res.data })
+            dispatch({ type: ActionType2.STOP_LOADING, })
+        }
+        catch (e) {
+            dispatch({ type: ActionType2.STOP_LOADING, })
+            dispatch({
+                type: ActionType2.ERROR,
+                payload: getErrors(e)
+            })
+        }
+    }
+}
+

@@ -30,17 +30,6 @@ export type PostInterface = {
     most_popular_comment: CommentInterface;
 }
 
-export type PostFullDataInterface = {
-    id: number;
-    author: UserLessInfoInterface;
-    title: string;
-    body: string;
-    created: string;
-    am_i_author: boolean;
-    is_liked_by_me: boolean;
-    likes: number;
-    post_comments: CommentInterface[];
-}
 
 export type PostMetaInterface = {
     all_data: number;
@@ -58,12 +47,18 @@ export enum ActionType {
     CHANGE_LIKE_STATUS = "CHANGE_LIKE_STATUS",
     GET_POSTS_META_SUCCESS = "GET_POSTS_META_SUCCESS",
     LOAD_MORE_POSTS = "LOAD_MORE_POSTS",
-    GET_FULL_DATA_POST = "GET_FULL_DATA_POST",
+    GET_POST = "GET_POST",
+    GET_POST_COMMENTS = "GET_POST_COMMENTS",
 }
 
-interface getFullDataPostAction {
-    type: ActionType.GET_FULL_DATA_POST;
-    payload: PostFullDataInterface;
+interface getPostComments {
+    type: ActionType.GET_POST_COMMENTS;
+    payload: CommentInterface[];
+}
+
+interface getPost {
+    type: ActionType.GET_POST;
+    payload: PostInterface
 }
 
 interface getPostsSuccessAction {
@@ -102,4 +97,4 @@ interface loadMorePostAction {
 }
 
 
-export type Action = getPostsSuccessAction | getUserPostsSuccessAction | sendPostSuccessAction | deletePostSuccessAction | changeLikeStatusAction | getPostMetaAction | loadMorePostAction | getFullDataPostAction
+export type Action = getPostsSuccessAction | getUserPostsSuccessAction | sendPostSuccessAction | deletePostSuccessAction | changeLikeStatusAction | getPostMetaAction | loadMorePostAction | getPostComments | getPost

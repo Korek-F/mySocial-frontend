@@ -9,7 +9,6 @@ type CommentProps = {
 }
 
 export const Comment: React.FC<CommentProps> = ({ comment }) => {
-    console.log(comment)
     return (
         <div className='comment'>
             <div className='comment_author'>
