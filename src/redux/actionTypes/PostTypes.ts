@@ -15,6 +15,7 @@ export type CommentInterface = {
     content: string;
     post: number;
     created: string;
+    comment_child: CommentInterface[] | null;
 }
 
 

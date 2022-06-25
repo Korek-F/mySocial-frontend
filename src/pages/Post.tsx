@@ -63,7 +63,8 @@ export const Post = () => {
             {post.am_i_author &&
                 <button className="main_button" onClick={deletePostClick}>Delete</button>}
 
-            {current_post_comments!.map(c => <Comment key={c.id} comment={c} />)}
+            {current_post_comments?.map(c => <Comment key={c.id}
+                comment={c} margin={3} />)}
         </div>
     )
 }

@@ -63,6 +63,7 @@ export const Post: React.FC<PostProps> = ({ postData }) => {
                 <button className="main_button" onClick={deletePostClick}>Delete</button>}
             {postData.most_popular_comment &&
                 <Comment key={postData.most_popular_comment.id}
+                    margin={3}
                     comment={postData.most_popular_comment} />}
         </div>
 
