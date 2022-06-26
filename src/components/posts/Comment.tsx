@@ -1,7 +1,9 @@
-import React from 'react'
+import React, { useDebugValue } from 'react'
 import { CommentInterface } from '../../redux/actionTypes/PostTypes'
 import { Link } from 'react-router-dom'
 import { getProperDate } from '../../utils/getProperDate'
+import { changeLikeStatus } from '../../redux/actionCreators/postActions'
+import { useDispatch } from 'react-redux'
 
 type CommentProps = {
     comment: CommentInterface,
@@ -10,6 +12,10 @@ type CommentProps = {
 }
 
 export const Comment: React.FC<CommentProps> = ({ comment, margin }) => {
+    const dispatch = useDispatch()
+    const likeOrDislike = () => {
+        dispatch(changeLikeStatus(comment!.id) as any)
+    }
     return (
         <>
             <div className='comment' style={{ marginLeft: margin + "rem" }} >
@@ -29,6 +35,9 @@ export const Comment: React.FC<CommentProps> = ({ comment, margin }) => {
                     <div className="post_date">{getProperDate(comment)}</div>
                 </div>
                 {comment.content}
+                <div onClick={likeOrDislike}>
+                    likes: {comment.likes}
+                </div>
             </div>
             {
                 comment.comment_child!.map(c =>

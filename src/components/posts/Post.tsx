@@ -22,7 +22,7 @@ export const Post: React.FC<PostProps> = ({ postData }) => {
     }
 
     const likeOrDislike = () => {
-        dispatch(changeLikeStatus(postData.id) as any)
+        dispatch(changeLikeStatus(postData.id, true) as any)
     }
 
     return (
@@ -49,7 +49,6 @@ export const Post: React.FC<PostProps> = ({ postData }) => {
 
                 <div className='post_body'>{postData.body}</div>
             </Link>
-            //To doo
             <div className='post_like'>
                 {postData.is_liked_by_me ?
                     <HiHeart className="like-icon" onClick={likeOrDislike} /> :

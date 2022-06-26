@@ -11,7 +11,7 @@ import { HiHeart, HiOutlineHeart } from "react-icons/hi";
 export const Post = () => {
     const dispatch = useDispatch()
     const { id } = useParams();
-    const { current_post_comments, post } = useTypedSelector(state => state.posts)
+    const { post, current_post_comments } = useTypedSelector(state => state.posts)
 
     useEffect(() => {
         if (id) dispatch(getPostComments(id) as any)
@@ -25,7 +25,7 @@ export const Post = () => {
     }
 
     const likeOrDislike = () => {
-        if (id) dispatch(changeLikeStatus(post!.id) as any)
+        if (id) dispatch(changeLikeStatus(post!.id, true) as any)
     }
 
     return (
@@ -62,6 +62,7 @@ export const Post = () => {
             </div>
             {post.am_i_author &&
                 <button className="main_button" onClick={deletePostClick}>Delete</button>}
+
 
             {current_post_comments?.map(c => <Comment key={c.id}
                 comment={c} margin={3} />)}

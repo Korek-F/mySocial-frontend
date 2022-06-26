@@ -46,6 +46,7 @@ export enum ActionType {
     SEND_POST_SUCCESS = "SEND_POST_SUCCESS",
     DELETE_POST_SUCCESS = "DELETE_POST_SUCCESS",
     CHANGE_LIKE_STATUS = "CHANGE_LIKE_STATUS",
+    CHANGE_COMMENT_LIKE_STATUS = "CHANGE_COMMENT_LIKE_STATUS",
     GET_POSTS_META_SUCCESS = "GET_POSTS_META_SUCCESS",
     LOAD_MORE_POSTS = "LOAD_MORE_POSTS",
     GET_POST = "GET_POST",
@@ -87,6 +88,11 @@ interface changeLikeStatusAction {
     payload: PostInterface
 }
 
+interface changeCommentLikeStatusAction {
+    type: ActionType.CHANGE_COMMENT_LIKE_STATUS,
+    payload: CommentInterface
+}
+
 interface getPostMetaAction {
     type: ActionType.GET_POSTS_META_SUCCESS,
     payload: PostMetaInterface
@@ -98,4 +104,4 @@ interface loadMorePostAction {
 }
 
 
-export type Action = getPostsSuccessAction | getUserPostsSuccessAction | sendPostSuccessAction | deletePostSuccessAction | changeLikeStatusAction | getPostMetaAction | loadMorePostAction | getPostComments | getPost
+export type Action = getPostsSuccessAction | getUserPostsSuccessAction | sendPostSuccessAction | deletePostSuccessAction | changeLikeStatusAction | getPostMetaAction | loadMorePostAction | getPostComments | getPost | changeCommentLikeStatusAction

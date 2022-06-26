@@ -65,6 +65,7 @@ export const sendPost = (title: string, body: string) => {
     return async (dispatch: Dispatch<Action | Action2>) => {
         dispatch({ type: ActionType2.LOADING })
         try {
+
             const res = await axios.post(`${BASE_URL}/blog/posts`, { "title": title, "body": body }, { "headers": authHeader() })
             dispatch({
                 type: ActionType.SEND_POST_SUCCESS,
@@ -111,16 +112,25 @@ export const deletePost = (id: number) => {
     }
 }
 
-export const changeLikeStatus = (post_id: number) => {
+export const changeLikeStatus = (id: number, post: boolean = false) => {
     return async (dispatch: Dispatch<Action | Action2>) => {
         dispatch({ type: ActionType2.LOADING })
         try {
-            const res = await axios.patch(`${BASE_URL}/blog/post/like-dislike`,
-                { "id": post_id }, { "headers": authHeader() })
-            dispatch({
-                type: ActionType.CHANGE_LIKE_STATUS,
-                payload: res.data
-            })
+            if (post) {
+                const res = await axios.patch(`${BASE_URL}/blog/post/like-dislike`,
+                    { "id": id }, { "headers": authHeader() })
+                dispatch({
+                    type: ActionType.CHANGE_LIKE_STATUS,
+                    payload: res.data
+                })
+            } else {
+                const res = await axios.patch(`${BASE_URL}/blog/comment/like-dislike`,
+                    { "id": id }, { "headers": authHeader() })
+                dispatch({
+                    type: ActionType.CHANGE_COMMENT_LIKE_STATUS,
+                    payload: res.data
+                })
+            }
             dispatch({
                 type: ActionType2.MESSAGE,
                 payload: "Successed"
