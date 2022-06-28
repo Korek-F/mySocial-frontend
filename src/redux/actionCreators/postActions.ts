@@ -136,6 +136,7 @@ export const changeLikeStatus = (id: number, post: boolean = false) => {
                 payload: "Successed"
             })
             dispatch({ type: ActionType2.STOP_LOADING, })
+
         }
         catch (e) {
             dispatch({ type: ActionType2.STOP_LOADING, })
@@ -187,3 +188,40 @@ export const getPost = (post_id: string) => {
     }
 }
 
+export const sendComment = (post_id: number, content: string,
+    parent_id: null | number = null) => {
+    return async (dispatch: Dispatch<Action | Action2>) => {
+        try {
+            const res = await axios.post(`${BASE_URL}/blog/post/${post_id}/details`, { "content": content, "parent_id": parent_id }, { "headers": authHeader() })
+            console.log(res)
+            dispatch({ type: ActionType2.STOP_LOADING, })
+            dispatch({ type: ActionType.SEND_COMMENT, payload: res.data })
+            dispatch({ type: ActionType2.MESSAGE, payload: "Sended!" })
+        }
+        catch (e) {
+            dispatch({ type: ActionType2.STOP_LOADING, })
+            dispatch({
+                type: ActionType2.ERROR,
+                payload: getErrors(e)
+            })
+        }
+    }
+}
+
+export const deleteComment = (comment_id: number) => {
+    return async (dispatch: Dispatch<Action | Action2>) => {
+        try {
+            const res = await axios.delete(`${BASE_URL}/blog/comment-delete/${comment_id}`, { "headers": authHeader() })
+            dispatch({ type: ActionType2.STOP_LOADING, })
+            dispatch({ type: ActionType.DELETE_COMMENT, payload: comment_id })
+            dispatch({ type: ActionType2.MESSAGE, payload: "Deleted!" })
+        }
+        catch (e) {
+            dispatch({ type: ActionType2.STOP_LOADING, })
+            dispatch({
+                type: ActionType2.ERROR,
+                payload: getErrors(e)
+            })
+        }
+    }
+}

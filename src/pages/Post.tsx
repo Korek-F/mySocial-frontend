@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom'
 import { getProperDate } from '../utils/getProperDate';
 import { Comment } from '../components/posts/Comment';
 import { HiHeart, HiOutlineHeart } from "react-icons/hi";
+import { CommentForm } from '../components/posts/CommentForm';
 
 export const Post = () => {
     const dispatch = useDispatch()
@@ -63,8 +64,9 @@ export const Post = () => {
             {post.am_i_author &&
                 <button className="main_button" onClick={deletePostClick}>Delete</button>}
 
-
+            <CommentForm post_id={post.id} parent={null} />
             {current_post_comments?.map(c => <Comment key={c.id}
+                is_most_popular={false}
                 comment={c} margin={3} />)}
         </div>
     )

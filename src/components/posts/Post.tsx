@@ -6,6 +6,7 @@ import { changeLikeStatus, deletePost } from '../../redux/actionCreators/postAct
 import { PostInterface } from '../../redux/actionTypes/PostTypes'
 import { Comment } from './Comment';
 import { getProperDate } from '../../utils/getProperDate';
+import { CommentForm } from './CommentForm';
 
 type PostProps = {
     postData: PostInterface,
@@ -60,10 +61,15 @@ export const Post: React.FC<PostProps> = ({ postData }) => {
             </div>
             {postData.am_i_author &&
                 <button className="main_button" onClick={deletePostClick}>Delete</button>}
+
+            <CommentForm post_id={postData.id} parent={null} />
+
             {postData.most_popular_comment &&
                 <Comment key={postData.most_popular_comment.id}
                     margin={3}
-                    comment={postData.most_popular_comment} />}
+                    comment={postData.most_popular_comment}
+                    is_most_popular={true}
+                />}
         </div>
 
     )

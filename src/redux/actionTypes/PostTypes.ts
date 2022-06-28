@@ -15,6 +15,7 @@ export type CommentInterface = {
     content: string;
     post: number;
     created: string;
+    parent: number | null;
     comment_child: CommentInterface[] | null;
 }
 
@@ -51,6 +52,8 @@ export enum ActionType {
     LOAD_MORE_POSTS = "LOAD_MORE_POSTS",
     GET_POST = "GET_POST",
     GET_POST_COMMENTS = "GET_POST_COMMENTS",
+    SEND_COMMENT = "SEND_COMMENT",
+    DELETE_COMMENT = "DELETE_COMMENT"
 }
 
 interface getPostComments {
@@ -78,6 +81,11 @@ interface sendPostSuccessAction {
     payload: PostInterface
 }
 
+interface sendCommentAction {
+    type: ActionType.SEND_COMMENT,
+    payload: CommentInterface
+}
+
 interface deletePostSuccessAction {
     type: ActionType.DELETE_POST_SUCCESS,
     payload: number
@@ -103,5 +111,10 @@ interface loadMorePostAction {
     payload: PostInterface[]
 }
 
+interface deleteCommentAction {
+    type: ActionType.DELETE_COMMENT,
+    payload: number
+}
 
-export type Action = getPostsSuccessAction | getUserPostsSuccessAction | sendPostSuccessAction | deletePostSuccessAction | changeLikeStatusAction | getPostMetaAction | loadMorePostAction | getPostComments | getPost | changeCommentLikeStatusAction
+
+export type Action = getPostsSuccessAction | getUserPostsSuccessAction | sendPostSuccessAction | deletePostSuccessAction | changeLikeStatusAction | getPostMetaAction | loadMorePostAction | getPostComments | getPost | changeCommentLikeStatusAction | sendCommentAction | deleteCommentAction
