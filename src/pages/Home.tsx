@@ -17,7 +17,7 @@ export const Home = () => {
         dispatch(getPosts(posts_meta!.page + 1) as any)
     }
 
-    console.log(posts)
+
     return (
         <div className='posts_container'>
             <PostFrom />

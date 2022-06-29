@@ -16,6 +16,8 @@ import { getUserProfile } from "./redux/actionCreators/userActions";
 import jwt_decode from 'jwt-decode'
 import { TokenInterface } from "./redux/actionTypes/authTypes";
 import { Post } from "./pages/Post";
+import { Notifications } from "./pages/Notifications";
+import { getNotifications } from "./redux/actionCreators/notiActions";
 
 function App() {
   const dispatch = useDispatch()
@@ -26,6 +28,7 @@ function App() {
     if (access_token) {
       const decoded_access = jwt_decode(access_token) as TokenInterface
       dispatch(getUserProfile(decoded_access.user_username) as any)
+      dispatch(getNotifications() as any)
     }
   }, [access])
 
@@ -38,6 +41,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/signin" element={<Signin />} />
             <Route path="/signup" element={<Signup />} />
+            <Route path="/notifications" element={<Notifications />} />
             <Route path="/activate/:token" element={<Activate />} />
             <Route path="/profile/:username" element={<Profile />} />
             <Route path="/post/:id" element={<Post />} />

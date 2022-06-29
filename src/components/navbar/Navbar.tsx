@@ -28,9 +28,14 @@ export const Navbar = () => {
                     >Logout</Link>
 
                     {user &&
-                        <Link
-                            className='navbar-link' to={"/profile/" + user.username}
-                        >My Profile</Link>
+                        <>
+                            <Link
+                                className='navbar-link' to={"/profile/" + user.username}
+                            >My Profile</Link>
+
+                            <Link
+                                className='navbar-link' to={"/notifications/"}>Notifications</Link>
+                        </>
                     }
                 </>
                 :
