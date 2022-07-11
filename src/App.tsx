@@ -23,13 +23,28 @@ function App() {
   const dispatch = useDispatch()
   const { loading, error, message, access } = useTypedSelector(state => state.auth)
 
+  function connectToHomeWs(access_token: string) {
+    let ws = new WebSocket("ws://localhost:8000/ws/home/?token=" + access_token)
+    ws.onclose = function (e) {
+      console.error("chat socket closed")
+    }
+    console.log("test")
+    ws.onmessage = function (e) {
+      const data = JSON.parse(e.data);
+      console.log("DADATA ", data)
+    }
+  }
+
+
   useEffect(() => {
     const access_token = localStorage.getItem("access")
     if (access_token) {
       const decoded_access = jwt_decode(access_token) as TokenInterface
       dispatch(getUserProfile(decoded_access.user_username) as any)
       dispatch(getNotifications() as any)
+      connectToHomeWs(access_token)
     }
+
   }, [access])
 
   return (

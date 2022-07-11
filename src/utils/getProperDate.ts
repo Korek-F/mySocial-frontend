@@ -1,5 +1,4 @@
 
-import { PostInterface } from "../redux/actionTypes/PostTypes"
 
 type LocalProps = {
     created: string,

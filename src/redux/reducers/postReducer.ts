@@ -29,7 +29,7 @@ const getComment: any = (
     new_comment: CommentInterface | null = null) => {
 
     let new_comments = []
-    if (!id) {
+    if (!id && comments) {
         return [...comments, new_comment]
     }
 

@@ -12,7 +12,6 @@ export const getNotifications = () => {
         try {
             const res = await axios.get(`${BASE_URL}/blog/notifications`,
                 { "headers": authHeader() })
-            console.log(res.data)
             dispatch({ type: ActionType.GET_NOTIFICATIONS, payload: res.data })
             dispatch({ type: ActionType2.STOP_LOADING, })
         }
