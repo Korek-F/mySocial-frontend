@@ -28,6 +28,7 @@ const getComment: any = (
     is_liked_by_me: boolean | null = null,
     new_comment: CommentInterface | null = null) => {
 
+    if (comments === null) return null
     let new_comments = []
     if (!id && comments) {
         return [...comments, new_comment]
@@ -50,20 +51,15 @@ const getComment: any = (
 }
 
 const deleteComment: any = (id: number, comments: any) => {
-    console.log("comments", comments)
-    console.log("id", id)
     let new_comments = []
     for (const comment of comments) {
         if (comment.id === id) {
-            console.log("C", comment)
         } else {
-            console.log("comment.comment_child", comment.comment_child)
             comment.comment_child = deleteComment(id, comment.comment_child)
             new_comments.push(comment)
         }
 
     }
-    console.log(new_comments)
     return new_comments
 }
 

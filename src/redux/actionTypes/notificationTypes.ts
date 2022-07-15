@@ -14,6 +14,8 @@ export type NotificationInterface = {
 
 export enum ActionType {
     GET_NOTIFICATIONS,
+    SET_CURRENT_NOTIFICATION,
+    DELETE_CURRENT_NOTIFICATION,
 }
 
 interface getNotificationsAction {
@@ -21,4 +23,13 @@ interface getNotificationsAction {
     payload: NotificationInterface[];
 }
 
-export type Action = getNotificationsAction
+interface setCurrentNotificationAction {
+    type: ActionType.SET_CURRENT_NOTIFICATION;
+    payload: string;
+}
+
+interface deleteCurrentNotification {
+    type: ActionType.DELETE_CURRENT_NOTIFICATION
+}
+
+export type Action = getNotificationsAction | setCurrentNotificationAction | deleteCurrentNotification

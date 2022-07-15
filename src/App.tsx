@@ -18,20 +18,30 @@ import { TokenInterface } from "./redux/actionTypes/authTypes";
 import { Post } from "./pages/Post";
 import { Notifications } from "./pages/Notifications";
 import { getNotifications } from "./redux/actionCreators/notiActions";
+import { PopupNotification } from "./components/notification/PopupNotification";
+import { ActionType } from "./redux/actionTypes/notificationTypes";
+import { getNotificationText } from "./utils/getNotificationText";
 
 function App() {
   const dispatch = useDispatch()
   const { loading, error, message, access } = useTypedSelector(state => state.auth)
+  const { current_notification } = useTypedSelector(state => state.noti)
 
   function connectToHomeWs(access_token: string) {
     let ws = new WebSocket("ws://localhost:8000/ws/home/?token=" + access_token)
     ws.onclose = function (e) {
       console.error("chat socket closed")
     }
-    console.log("test")
     ws.onmessage = function (e) {
       const data = JSON.parse(e.data);
-      console.log("DADATA ", data)
+      console.log("WS", data)
+      const from_user = data.payload.data.from
+      const noti_type = data.payload.data.notification_type
+      console.log(from_user)
+      dispatch({
+        type: ActionType.SET_CURRENT_NOTIFICATION,
+        payload: getNotificationText(from_user, noti_type)
+      })
     }
   }
 
@@ -65,6 +75,7 @@ function App() {
         {loading && <Loading />}
         {error && <ErrorMessage error={error} />}
         {message && <SuccessMessage message={message} />}
+        {current_notification && <PopupNotification notification={current_notification} />}
 
       </Router >
     </div >
