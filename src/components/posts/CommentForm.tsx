@@ -20,15 +20,16 @@ export const CommentForm: React.FC<CommentFormProps> = ({ post_id, parent }) => 
         }
     }
     return (
-        <div>
+        <div className='comment_form'>
             {show ? <>
-                <input type="text" onChange={(e) => setComment(e.target.value)} />
-                <button onClick={sendCommentOnClick}>Send</button>
-                <span onClick={() => setShow(false)}>Hide</span>
+                <input type="text" className="comment_form_input" onChange={(e) => setComment(e.target.value)} />
+                <button className="comment_form_send main-btn"
+                    onClick={sendCommentOnClick}>Send</button>
+                <span className="comment_form_show" onClick={() => setShow(false)}>Hide</span>
             </> :
-                <div onClick={() => setShow(true)}>
+                <span className="comment_form_show" onClick={() => setShow(true)}>
                     Reply
-                </div>
+                </span>
             }
         </div>
     )

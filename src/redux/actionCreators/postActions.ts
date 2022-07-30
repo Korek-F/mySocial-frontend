@@ -91,7 +91,7 @@ export const deletePost = (id: number) => {
     return async (dispatch: Dispatch<Action | Action2>) => {
         dispatch({ type: ActionType2.LOADING })
         try {
-            const res = await axios.delete(`${BASE_URL}/blog/post-delete/${id}`, { "headers": authHeader() })
+            await axios.delete(`${BASE_URL}/blog/post-delete/${id}`, { "headers": authHeader() })
             dispatch({
                 type: ActionType.DELETE_POST_SUCCESS,
                 payload: id
@@ -154,7 +154,6 @@ export const getPostComments = (post_id: string) => {
 
         try {
             const res = await axios.get(`${BASE_URL}/blog/post/${post_id}/details`, { "headers": authHeader() })
-            console.log("COMMENTS", res)
 
             dispatch({ type: ActionType.GET_POST_COMMENTS, payload: res.data })
             dispatch({ type: ActionType2.STOP_LOADING, })
@@ -192,6 +191,7 @@ export const sendComment = (post_id: number, content: string,
     parent_id: null | number = null) => {
     return async (dispatch: Dispatch<Action | Action2>) => {
         try {
+            console.log("parent_id", parent_id)
             const res = await axios.post(`${BASE_URL}/blog/post/${post_id}/details`, { "content": content, "parent_id": parent_id }, { "headers": authHeader() })
             console.log(res)
             dispatch({ type: ActionType2.STOP_LOADING, })
@@ -211,7 +211,7 @@ export const sendComment = (post_id: number, content: string,
 export const deleteComment = (comment_id: number) => {
     return async (dispatch: Dispatch<Action | Action2>) => {
         try {
-            const res = await axios.delete(`${BASE_URL}/blog/comment-delete/${comment_id}`, { "headers": authHeader() })
+            await axios.delete(`${BASE_URL}/blog/comment-delete/${comment_id}`, { "headers": authHeader() })
             dispatch({ type: ActionType2.STOP_LOADING, })
             dispatch({ type: ActionType.DELETE_COMMENT, payload: comment_id })
             dispatch({ type: ActionType2.MESSAGE, payload: "Deleted!" })

@@ -4,6 +4,7 @@ import { PostFrom } from '../components/forms/PostFrom'
 import { Post } from '../components/posts/Post'
 import { useTypedSelector } from '../hooks/useTypeSelector'
 import { getPosts } from '../redux/actionCreators/postActions'
+import { AiOutlineArrowDown } from 'react-icons/ai';
 
 export const Home = () => {
     const dispatch = useDispatch()
@@ -27,7 +28,12 @@ export const Home = () => {
                     <Post key={e.id} postData={e} />
                 )
             }
-            {(posts_meta && posts_meta.page + 1 <= posts_meta.page_size) && <button onClick={load_more_posts}>Load more</button>}
+
+            {(posts_meta && posts_meta.page + 1 <= posts_meta.page_size) &&
+                <button onClick={load_more_posts} className="load_more">
+                    <AiOutlineArrowDown />
+                </button>}
+
 
         </div >
     )

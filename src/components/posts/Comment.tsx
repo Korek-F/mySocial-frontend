@@ -5,6 +5,8 @@ import { getProperDate } from '../../utils/getProperDate'
 import { changeLikeStatus, deleteComment } from '../../redux/actionCreators/postActions'
 import { useDispatch } from 'react-redux'
 import { CommentForm } from './CommentForm'
+import { HiHeart, HiOutlineHeart } from "react-icons/hi";
+import { FiDelete } from "react-icons/fi";
 
 type CommentProps = {
     comment: CommentInterface,
@@ -30,7 +32,7 @@ export const Comment: React.FC<CommentProps> = ({ comment, margin, is_most_popul
                     <Link className='profile_link'
                         to={"/profile/" + comment.author.username}>
                         <img className="post_author_image"
-                            src={comment.author.avatar} />
+                            src={comment.author.avatar} alt="Profile" />
 
                         <div className="post_author_username">
                             {comment.author.name ?
@@ -40,18 +42,29 @@ export const Comment: React.FC<CommentProps> = ({ comment, margin, is_most_popul
                         </div>
                     </Link>
                     <div className="post_date">{getProperDate(comment)}</div>
+
+                    {(comment.am_i_author && !is_most_popular) &&
+                        <div className='comment_options'>
+                            <FiDelete className='my_option'
+                                onClick={deleteCommentOnClick} />
+                        </div>
+                    }
                 </div>
-                {comment.content}
+                <div className='comment_content'>
+                    {comment.content}
+                </div>
                 {!is_most_popular &&
                     <>
-                        <div onClick={likeOrDislike}>
-                            likes: {comment.likes}
+                        <div className='post_like'>
+                            {comment.is_liked_by_me ?
+                                <HiHeart className="like-icon comment_like" onClick={likeOrDislike} /> :
+                                <HiOutlineHeart className="like-icon comment_like" onClick={likeOrDislike} />
+                            }
+                            {comment.likes > 0 &&
+                                <span className='like-count'>{comment.likes}</span>
+                            }
+
                         </div>
-                        {comment.am_i_author &&
-                            <span className='my_option'
-                                onClick={deleteCommentOnClick}>
-                                delete</span>
-                        }
                     </>
                 }
 

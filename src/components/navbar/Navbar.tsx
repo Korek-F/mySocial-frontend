@@ -9,6 +9,7 @@ import "./../../css/main.css"
 export const Navbar = () => {
     const { access } = useTypedSelector(state => state.auth)
     const { user } = useTypedSelector(state => state.user)
+    const { unseen_notifications_count } = useTypedSelector(state => state.noti)
     const dispatch = useDispatch()
 
 
@@ -20,23 +21,24 @@ export const Navbar = () => {
     return (
         <div className='main-navbar'>
             <Link className='navbar-link' to="/" >Main</Link>
-            {access ?
+            {(access && user) ?
+
                 <>
+                    <Link
+                        className='navbar-link' to={"/profile/" + user.username}
+                    >My Profile</Link>
+
+                    <Link
+                        className='navbar-link' to={"/notifications/"}>
+                        Notifications
+                        {(unseen_notifications_count > 0) &&
+                            <div className="noti_count">{unseen_notifications_count}</div>}
+                    </Link>
+
                     <Link className='navbar-link'
                         to="/"
                         onClick={logoutOnClick}
                     >Logout</Link>
-
-                    {user &&
-                        <>
-                            <Link
-                                className='navbar-link' to={"/profile/" + user.username}
-                            >My Profile</Link>
-
-                            <Link
-                                className='navbar-link' to={"/notifications/"}>Notifications</Link>
-                        </>
-                    }
                 </>
                 :
                 <>

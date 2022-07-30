@@ -16,6 +16,9 @@ export enum ActionType {
     GET_NOTIFICATIONS,
     SET_CURRENT_NOTIFICATION,
     DELETE_CURRENT_NOTIFICATION,
+    SEEN_NOTIFICATIONS,
+    UNSEEN_NOTIFICATIONS_COUNT,
+    UNSEEN_NOTIFICATIONS_COUNT_INCREMENT
 }
 
 interface getNotificationsAction {
@@ -31,5 +34,17 @@ interface setCurrentNotificationAction {
 interface deleteCurrentNotification {
     type: ActionType.DELETE_CURRENT_NOTIFICATION
 }
+interface seenNotificationsAction {
+    type: ActionType.SEEN_NOTIFICATIONS
+}
 
-export type Action = getNotificationsAction | setCurrentNotificationAction | deleteCurrentNotification
+interface unseenNotificationsCountAction {
+    type: ActionType.UNSEEN_NOTIFICATIONS_COUNT;
+    payload: number
+}
+
+interface unseenNotificationsCountIncrementAction {
+    type: ActionType.UNSEEN_NOTIFICATIONS_COUNT_INCREMENT
+}
+
+export type Action = getNotificationsAction | setCurrentNotificationAction | deleteCurrentNotification | seenNotificationsAction | unseenNotificationsCountAction | unseenNotificationsCountIncrementAction

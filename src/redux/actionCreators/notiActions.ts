@@ -24,3 +24,36 @@ export const getNotifications = () => {
         }
     }
 }
+
+export const seenNotifications = () => {
+    return async (dispatch: Dispatch<Action | Action2>) => {
+        try {
+            const res = await axios.get(`${BASE_URL}/blog/seen-notifications`,
+                { "headers": authHeader() })
+            dispatch({ type: ActionType.SEEN_NOTIFICATIONS })
+
+        }
+        catch (e) {
+            dispatch({
+                type: ActionType2.ERROR,
+                payload: getErrors(e)
+            })
+        }
+    }
+}
+
+export const unseenNotificationsCount = () => {
+    return async (dispatch: Dispatch<Action | Action2>) => {
+        try {
+            const res = await axios.get(`${BASE_URL}/blog/unseen-notifications-count`, { "headers": authHeader() })
+            dispatch({ type: ActionType.UNSEEN_NOTIFICATIONS_COUNT, payload: res.data })
+        }
+
+        catch (e) {
+            dispatch({
+                type: ActionType2.ERROR,
+                payload: getErrors(e)
+            })
+        }
+    }
+}

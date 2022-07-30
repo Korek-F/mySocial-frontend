@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react'
 import { useTypedSelector } from '../hooks/useTypeSelector'
 import { Notification } from '../components/notification/Notification'
-import { getNotifications } from '../redux/actionCreators/notiActions'
+import { getNotifications, seenNotifications } from '../redux/actionCreators/notiActions'
 import { useDispatch } from 'react-redux'
+import { ActionType } from '../redux/actionTypes/notificationTypes'
 
 export const Notifications = () => {
     const { notifications } = useTypedSelector(state => state.noti)
@@ -10,11 +11,13 @@ export const Notifications = () => {
 
     useEffect(() => {
         dispatch(getNotifications() as any)
+        dispatch(seenNotifications() as any)
+        dispatch({ type: ActionType.UNSEEN_NOTIFICATIONS_COUNT, payload: 0 })
     }, [])
 
     return (
-        <div>
-            Notifications
+        <div className='noti_page'>
+            <h1> Notifications</h1>
             {notifications?.map(n => <Notification key={n.id} noti={n} />)}
         </div>
     )

@@ -56,9 +56,12 @@ export const EditModal: FC<EditModalProps> = ({ setEdit }) => {
 
             <div className='profile_upper' style={{ "margin": "1rem" }}>
                 <img className="profile_avatar"
-                    src={avatar ? URL.createObjectURL(avatar) : current_user.avatar} onClick={showAvatar} />
+                    src={avatar ? URL.createObjectURL(avatar) : current_user.avatar} onClick={showAvatar}
+                    alt="Profile avatar" />
                 <img className="profile_cover"
-                    src={cover ? URL.createObjectURL(cover) : current_user.cover} onClick={showCover} />
+                    src={cover ? URL.createObjectURL(cover) : current_user.cover}
+                    alt="Profile cover"
+                    onClick={showCover} />
             </div>
 
             <input type="file" ref={avatarRef} onChange={(e) => handleAvatar(e)} style={{ "display": "none" }} />

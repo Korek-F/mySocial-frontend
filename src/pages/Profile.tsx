@@ -20,8 +20,7 @@ export const Profile = () => {
             dispatch(getOtherUserProfile(username) as any)
             dispatch(getUserPosts(username) as any)
         }
-
-    }, [username, edit])
+    }, [username, edit, dispatch])
 
     const followOnClick = () => {
         dispatch(followAction(username || "TEST") as any)
@@ -32,8 +31,8 @@ export const Profile = () => {
             {edit && <EditModal setEdit={setEdit} />}
 
             <div className='profile_upper'>
-                <img className="profile_cover" src={current_user?.cover!} />
-                <img className="profile_avatar" src={current_user?.avatar!} />
+                <img className="profile_cover" src={current_user?.cover!} alt="Profile cover" />
+                <img className="profile_avatar" src={current_user?.avatar!} alt="Profile avatar" />
             </div>
             <div className='profile_lower'>
                 <div className='profile_username'>{current_user?.username} </div>

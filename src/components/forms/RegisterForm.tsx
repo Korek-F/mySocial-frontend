@@ -10,7 +10,6 @@ export const RegisterForm = () => {
 
     const onSumbitHandler = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        console.log(username, email)
 
         dispatch(register(email, username, password) as any)
     }

@@ -12,7 +12,6 @@ export const PostFrom = () => {
 
     const post = () => {
         if (title && text) {
-            console.log(title, text)
             setTitle("")
             setText("")
             dispatch(sendPost(title, text) as any)
