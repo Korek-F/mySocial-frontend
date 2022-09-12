@@ -1,6 +1,10 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { sendComment } from '../../redux/actionCreators/postActions'
+import { AiOutlineSend } from "react-icons/ai";
+import { BiCommentAdd } from "react-icons/bi";
+import { RiChatDeleteLine } from "react-icons/ri";
+import { ActionType } from '../../redux/actionTypes/authTypes';
 
 type CommentFormProps = {
     parent: number | null,
@@ -13,23 +17,23 @@ export const CommentForm: React.FC<CommentFormProps> = ({ post_id, parent }) => 
     const dispatch = useDispatch()
 
     const sendCommentOnClick = () => {
-        if (comment.length > 3) {
+        if (comment.length > 1) {
             dispatch(sendComment(post_id, comment, parent) as any)
             setComment("")
             setShow(false)
+        } else {
+            dispatch({ type: ActionType.ERROR, payload: "Message can't be shorter than 2 marks." })
         }
     }
     return (
         <div className='comment_form'>
             {show ? <>
                 <input type="text" className="comment_form_input" onChange={(e) => setComment(e.target.value)} />
-                <button className="comment_form_send main-btn"
-                    onClick={sendCommentOnClick}>Send</button>
-                <span className="comment_form_show" onClick={() => setShow(false)}>Hide</span>
+                <AiOutlineSend className="send_button my-icon"
+                    onClick={sendCommentOnClick} />
+                <RiChatDeleteLine className="comment-icons my-icon" onClick={() => setShow(false)} />
             </> :
-                <span className="comment_form_show" onClick={() => setShow(true)}>
-                    Reply
-                </span>
+                <BiCommentAdd className="comment-icons my-icon" onClick={() => setShow(true)} />
             }
         </div>
     )

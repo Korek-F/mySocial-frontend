@@ -28,9 +28,9 @@ function App() {
   const { current_notification, unseen_notifications_count } = useTypedSelector(state => state.noti)
 
   function connectToHomeWs(access_token: string) {
-    let ws = new WebSocket("ws://localhost:8000/ws/home/?token=" + access_token)
+    let ws = new WebSocket("ws://127.0.0.1:80/ws/home/?token=" + access_token)
     ws.onclose = function (e) {
-      console.error("chat socket closed")
+      console.error(e)
     }
     ws.onmessage = function (e) {
       const data = JSON.parse(e.data);

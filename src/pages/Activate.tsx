@@ -9,14 +9,13 @@ export const Activate = () => {
     const dispatch = useDispatch()
 
     const goVerify = () => {
-        console.log("verify")
         dispatch(verify(`${token}`) as any)
     }
 
     return (
         <div>
             <h1>Verification</h1>
-            <button onClick={goVerify}>
+            <button className=".main_butto" onClick={goVerify}>
                 Activate
             </button>
         </div>

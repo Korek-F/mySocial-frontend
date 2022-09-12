@@ -114,6 +114,7 @@ export const postReducer = (state: State = initialState, action: Action): State 
             }
 
         case ActionType.CHANGE_LIKE_STATUS:
+
             return {
                 ...state,
                 posts: state.posts.map(post => post.id === action.payload.id ?

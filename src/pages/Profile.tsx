@@ -6,6 +6,7 @@ import { EditModal } from '../components/profile/EditModal'
 import { useTypedSelector } from '../hooks/useTypeSelector'
 import { getUserPosts } from '../redux/actionCreators/postActions'
 import { followAction, getOtherUserProfile } from '../redux/actionCreators/userActions'
+import { AiFillEdit } from "react-icons/ai"
 
 export const Profile = () => {
     const dispatch = useDispatch()
@@ -44,10 +45,8 @@ export const Profile = () => {
                         Following: {current_user?.following} </div>
 
                     {current_user?.username === user?.username && <>
-                        <button className="main_button"
-                            onClick={() => setEdit(!edit)}>
-                            Edit
-                        </button>
+                        <AiFillEdit className="my-icon edit-profile"
+                            onClick={() => setEdit(!edit)} />
                     </>}
 
                     {(access && current_user?.username !== user?.username) &&

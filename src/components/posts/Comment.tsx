@@ -57,8 +57,8 @@ export const Comment: React.FC<CommentProps> = ({ comment, margin, is_most_popul
                     <>
                         <div className='post_like'>
                             {comment.is_liked_by_me ?
-                                <HiHeart className="like-icon comment_like" onClick={likeOrDislike} /> :
-                                <HiOutlineHeart className="like-icon comment_like" onClick={likeOrDislike} />
+                                <HiHeart className="like-icon my-icon comment_like" onClick={likeOrDislike} /> :
+                                <HiOutlineHeart className="like-icon my-icon comment_like" onClick={likeOrDislike} />
                             }
                             {comment.likes > 0 &&
                                 <span className='like-count'>{comment.likes}</span>

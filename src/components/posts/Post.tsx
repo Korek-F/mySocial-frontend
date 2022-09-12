@@ -2,6 +2,7 @@ import React from 'react'
 import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { HiHeart, HiOutlineHeart } from "react-icons/hi";
+import { MdDelete } from "react-icons/md";
 import { changeLikeStatus, deletePost } from '../../redux/actionCreators/postActions'
 import { PostInterface } from '../../redux/actionTypes/PostTypes'
 import { Comment } from './Comment';
@@ -16,7 +17,7 @@ type PostProps = {
 export const Post: React.FC<PostProps> = ({ postData }) => {
     const dispatch = useDispatch()
 
-
+    console.log("DSFASDF")
 
     const deletePostClick = () => {
         dispatch(deletePost(postData.id) as any)
@@ -29,6 +30,9 @@ export const Post: React.FC<PostProps> = ({ postData }) => {
     return (
 
         <div className='post'>
+            {postData.am_i_author &&
+                <MdDelete className="my-icon delete-post" onClick={deletePostClick} />}
+
             <div className='post_author'>
                 <Link className='profile_link'
                     to={"/profile/" + postData.author.username}>
@@ -50,17 +54,16 @@ export const Post: React.FC<PostProps> = ({ postData }) => {
 
                 <div className='post_body'>{postData.body}</div>
             </Link>
-            <div className='post_like'>
+            <>
                 {postData.is_liked_by_me ?
-                    <HiHeart className="like-icon" onClick={likeOrDislike} /> :
-                    <HiOutlineHeart className="like-icon" onClick={likeOrDislike} />
+                    <HiHeart className="like-icon my-icon" onClick={likeOrDislike} /> :
+                    <HiOutlineHeart className="like-icon my-icon" onClick={likeOrDislike} />
                 }
                 {postData.likes > 0 &&
                     <span className='like-count'>{postData.likes}</span>
                 }
-            </div>
-            {postData.am_i_author &&
-                <button className="main_button" onClick={deletePostClick}>Delete</button>}
+            </>
+
 
             <CommentForm post_id={postData.id} parent={null} />
 

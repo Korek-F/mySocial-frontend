@@ -23,7 +23,7 @@ export const Notification: React.FC<NotificationProps> = ({ noti }) => {
                 setNotiLink(`/post/${noti.post}`)
                 setNotiText(`${noti.from_user.username} liked your post!`)
                 break;
-            case "CL":
+            case "LC":
                 setNotiLink(`/post/${noti.post}`)
                 setNotiText(`${noti.from_user.username} liked your comment!`)
                 break;

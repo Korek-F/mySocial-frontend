@@ -20,7 +20,7 @@ export const Navbar = () => {
 
     return (
         <div className='main-navbar'>
-            <Link className='navbar-link' to="/" >Main</Link>
+            <Link className='navbar-link' to="/" >Blog</Link>
             {(access && user) ?
 
                 <>

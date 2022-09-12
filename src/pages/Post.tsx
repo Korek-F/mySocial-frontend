@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router';
+import { useNavigate } from "react-router-dom";
 import { useTypedSelector } from '../hooks/useTypeSelector';
 import { changeLikeStatus, deletePost, getPost, getPostComments } from '../redux/actionCreators/postActions';
 import { Link } from 'react-router-dom'
@@ -8,11 +9,13 @@ import { getProperDate } from '../utils/getProperDate';
 import { Comment } from '../components/posts/Comment';
 import { HiHeart, HiOutlineHeart } from "react-icons/hi";
 import { CommentForm } from '../components/posts/CommentForm';
+import { MdDelete } from "react-icons/md";
 
 export const Post = () => {
     const dispatch = useDispatch()
     const { id } = useParams();
     const { post, current_post_comments } = useTypedSelector(state => state.posts)
+    const navigate = useNavigate();
 
     useEffect(() => {
         if (id) dispatch(getPostComments(id) as any)
@@ -22,16 +25,23 @@ export const Post = () => {
     }, [id])
 
     const deletePostClick = () => {
-        if (id) dispatch(deletePost(post!.id) as any)
+        if (id) {
+            dispatch(deletePost(post!.id) as any)
+            return navigate(`/profile/${post?.author.username}`);
+        }
     }
 
     const likeOrDislike = () => {
         if (id) dispatch(changeLikeStatus(post!.id, true) as any)
     }
 
+
+
     return (
         post &&
         <div className='current_post'>
+            {post.am_i_author &&
+                <MdDelete className="my-icon delete-post" onClick={deletePostClick} />}
             <div className='post_author'>
                 <Link className='profile_link'
                     to={"/profile/" + post.author.username}>
@@ -54,20 +64,21 @@ export const Post = () => {
 
             <div className='post_like'>
                 {post.is_liked_by_me ?
-                    <HiHeart className="like-icon" onClick={likeOrDislike} /> :
-                    <HiOutlineHeart className="like-icon" onClick={likeOrDislike} />
+                    <HiHeart className="like-icon my-icon" onClick={likeOrDislike} /> :
+                    <HiOutlineHeart className="like-icon my-icon" onClick={likeOrDislike} />
                 }
                 {post.likes > 0 &&
                     <span className='like-count'>{post.likes}</span>
                 }
             </div>
-            {post.am_i_author &&
-                <button className="main_button" onClick={deletePostClick}>Delete</button>}
 
             <CommentForm post_id={post.id} parent={null} />
+
+
             {current_post_comments?.map(c => <Comment key={c.id}
                 is_most_popular={false}
                 comment={c} margin={3} />)}
+
         </div>
     )
 }

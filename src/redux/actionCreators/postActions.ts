@@ -119,6 +119,7 @@ export const changeLikeStatus = (id: number, post: boolean = false) => {
             if (post) {
                 const res = await axios.patch(`${BASE_URL}/blog/post/like-dislike`,
                     { "id": id }, { "headers": authHeader() })
+                console.log("ASDAS", res.data)
                 dispatch({
                     type: ActionType.CHANGE_LIKE_STATUS,
                     payload: res.data

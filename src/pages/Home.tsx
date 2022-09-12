@@ -22,14 +22,14 @@ export const Home = () => {
     return (
         <div className='posts_container'>
             <PostFrom />
-            <h1> Postss</h1>
+            <h1> Posts</h1>
             {
                 posts.map(e =>
                     <Post key={e.id} postData={e} />
                 )
             }
 
-            {(posts_meta && posts_meta.page + 1 <= posts_meta.page_size) &&
+            {(posts_meta && posts_meta.next) &&
                 <button onClick={load_more_posts} className="load_more">
                     <AiOutlineArrowDown />
                 </button>}
