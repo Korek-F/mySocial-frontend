@@ -17,6 +17,7 @@ export type CommentInterface = {
     created: string;
     parent: number | null;
     comment_child: CommentInterface[] | null;
+    ancestor_number: number | null;
 }
 
 

@@ -28,12 +28,13 @@ export const CommentForm: React.FC<CommentFormProps> = ({ post_id, parent }) => 
     return (
         <div className='comment_form'>
             {show ? <>
+                <RiChatDeleteLine className="comment-icon " onClick={() => setShow(false)} />
                 <input type="text" className="comment_form_input" onChange={(e) => setComment(e.target.value)} />
-                <AiOutlineSend className="send_button my-icon"
+                <AiOutlineSend className="send-icon"
                     onClick={sendCommentOnClick} />
-                <RiChatDeleteLine className="comment-icons my-icon" onClick={() => setShow(false)} />
+
             </> :
-                <BiCommentAdd className="comment-icons my-icon" onClick={() => setShow(true)} />
+                <BiCommentAdd className="comment-icon2 " onClick={() => setShow(true)} />
             }
         </div>
     )

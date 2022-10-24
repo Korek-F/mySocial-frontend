@@ -23,7 +23,7 @@ export const LoginForm = () => {
                     placeholder="Password"
                     onChange={(e) => setPassword(e.target.value)}
                     className="input-text" />
-                <button type="submit" className='main_button'>Login</button>
+                <button type="submit" className='login_button'>Login</button>
             </form>
         </div>
     )

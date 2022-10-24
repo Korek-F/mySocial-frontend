@@ -18,7 +18,12 @@ export const Notifications = () => {
     return (
         <div className='noti_page'>
             <h1> Notifications</h1>
-            {notifications?.map(n => <Notification key={n.id} noti={n} />)}
+            {notifications?.length! > 0 ? <>
+                {notifications?.map(n => <Notification key={n.id} noti={n} />)}
+            </>
+                :
+                <h3>You don't have any notifications yet.</h3>}
+
         </div>
     )
 }

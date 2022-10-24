@@ -62,7 +62,7 @@ export const Post = () => {
 
             <div className='post_body'>{post.body}</div>
 
-            <div className='post_like'>
+            <div className='post_actions'>
                 {post.is_liked_by_me ?
                     <HiHeart className="like-icon my-icon" onClick={likeOrDislike} /> :
                     <HiOutlineHeart className="like-icon my-icon" onClick={likeOrDislike} />
@@ -70,9 +70,10 @@ export const Post = () => {
                 {post.likes > 0 &&
                     <span className='like-count'>{post.likes}</span>
                 }
+                <CommentForm post_id={post.id} parent={null} />
             </div>
 
-            <CommentForm post_id={post.id} parent={null} />
+
 
 
             {current_post_comments?.map(c => <Comment key={c.id}

@@ -3,6 +3,8 @@ import { useDispatch } from 'react-redux'
 
 import { useTypedSelector } from '../../hooks/useTypeSelector'
 import { sendPost } from '../../redux/actionCreators/postActions'
+import { BiSend } from 'react-icons/bi';
+import { UserAvatar } from '../images/UserAvatar';
 
 export const PostFrom = () => {
     const { user } = useTypedSelector(state => state.user)
@@ -23,8 +25,8 @@ export const PostFrom = () => {
                 <div className='post_form'>
                     <div className='post_author'>
 
-                        <img className="post_author_image"
-                            src={`${user.avatar}`} alt="Your profile avatar" />
+                        <UserAvatar avatar_user={user} />
+
                         <div className="post_author_username">
                             {user.username}</div>
 
@@ -40,8 +42,9 @@ export const PostFrom = () => {
                         onChange={(e) => setText(e.target.value)}
                         value={text}
                         placeholder="What's up?" maxLength={1000} />
-                    <button className='main_button' onClick={post}
-                    >Publish</button>
+                    <div className="btn-container">
+                        <BiSend className="send_button" onClick={post} />
+                    </div>
                 </div>
 
             }

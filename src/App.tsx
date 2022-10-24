@@ -21,6 +21,7 @@ import { getNotifications, unseenNotificationsCount } from "./redux/actionCreato
 import { PopupNotification } from "./components/notification/PopupNotification";
 import { ActionType } from "./redux/actionTypes/notificationTypes";
 import { getNotificationText } from "./utils/getNotificationText";
+import { Settings } from "./pages/Settings";
 
 function App() {
   const dispatch = useDispatch()
@@ -28,7 +29,7 @@ function App() {
   const { current_notification, unseen_notifications_count } = useTypedSelector(state => state.noti)
 
   function connectToHomeWs(access_token: string) {
-    let ws = new WebSocket("ws://127.0.0.1:80/ws/home/?token=" + access_token)
+    let ws = new WebSocket("ws://localhost:80/ws/home/?token=" + access_token)
     ws.onclose = function (e) {
       console.error(e)
     }
@@ -73,6 +74,7 @@ function App() {
             <Route path="/activate/:token" element={<Activate />} />
             <Route path="/profile/:username" element={<Profile />} />
             <Route path="/post/:id" element={<Post />} />
+            <Route path="/settings" element={<Settings />} />
           </Routes>
         </div>
         {loading && <Loading />}

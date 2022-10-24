@@ -15,7 +15,8 @@ export const Activate = () => {
     return (
         <div>
             <h1>Verification</h1>
-            <button className=".main_butto" onClick={goVerify}>
+            <h2>Do you want to verify this account?</h2>
+            <button className="main_button" onClick={goVerify}>
                 Activate
             </button>
         </div>

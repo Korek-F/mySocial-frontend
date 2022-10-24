@@ -28,7 +28,7 @@ export const RegisterForm = () => {
                     placeholder="Password"
                     onChange={(e) => setPassword(e.target.value)}
                     className="input-text" />
-                <button type="submit" className='main_button'>Sign up</button>
+                <button type="submit" className='login_button'>Sign Up</button>
             </form>
         </div>
     )
