@@ -45,6 +45,10 @@ export const getOtherUserProfile = (username: string) => {
                 type: ActionType2.ERROR,
                 payload: getErrors(e)
             })
+            dispatch({
+                type: ActionType.GET_OTHER_USER_PROFILE_SUCCESS,
+                payload: null
+            })
             dispatch({ type: ActionType2.STOP_LOADING, })
         }
     }

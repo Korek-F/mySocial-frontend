@@ -7,12 +7,13 @@ import { useTypedSelector } from '../hooks/useTypeSelector';
 export const Signin = () => {
     const navigate = useNavigate()
     const { access } = useTypedSelector(state => state.auth)
+    const { user } = useTypedSelector(state => state.user)
 
     useEffect(() => {
-        if (access) {
+        if (access && user) {
             navigate("/")
         }
-    }, [access])
+    }, [access, user])
 
     return (
         <div>

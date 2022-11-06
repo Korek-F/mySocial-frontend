@@ -19,7 +19,7 @@ export const Navbar = () => {
 
 
     return (
-        <div className={active ? "main-navbar main-navbar-active" : "main-navbar"} >
+        <div className={active ? "main-navbar main-navbar-active" : "main-navbar"} onClick={() => setActive(!active)}>
 
             <div
                 className={active ? "navbar_hamburger navbar_hamburger-active" : "navbar_hamburger"}

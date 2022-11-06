@@ -22,7 +22,7 @@ export const Post = () => {
         if (id) dispatch(getPost(id) as any)
 
 
-    }, [id])
+    }, [id, dispatch])
 
     const deletePostClick = () => {
         if (id) {
@@ -36,7 +36,6 @@ export const Post = () => {
     }
 
 
-
     return (
         post &&
         <div className='current_post'>
@@ -46,7 +45,7 @@ export const Post = () => {
                 <Link className='profile_link'
                     to={"/profile/" + post.author.username}>
                     <img className="post_author_image"
-                        src={post.author.avatar} />
+                        src={post.author.avatar} alt="" />
                     <div className="post_author_username">
                         {post.author.name ?
                             <>{post.author.name} ({post.author.username})</> :
@@ -60,7 +59,31 @@ export const Post = () => {
 
             <div className='post_title'>{post.title} </div>
 
-            <div className='post_body'>{post.body}</div>
+            <div className='post_body'>
+                {
+                    post.body.split(" ").map((e, i) =>
+                        <span key={i}>{
+                            e.startsWith("@")
+                                ?
+                                <>
+                                    <span > </span>
+                                    <Link className='post_profile_link'
+                                        key={i}
+                                        to={"/profile/" + e.slice(1)}>
+                                        {e}
+                                    </Link>
+                                    <span> </span>
+                                </>
+                                :
+                                <>
+                                    {e + " "}
+                                </>
+                        }
+                        </span>
+                    )
+                }
+
+            </div>
 
             <div className='post_actions'>
                 {post.is_liked_by_me ?

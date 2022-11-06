@@ -270,7 +270,9 @@ a:visited {
     color: var(--main-secondary-color);
 }
 
-
+.post_profile_link {
+    color: #0066ff !important;
+}
 
 .post_title {
     font-size: 1.2rem;
@@ -323,7 +325,7 @@ a:visited {
 
 
 .like-count {
-    font-size: 2rem;
+    font-size: 1.65rem;
     word-break: keep-all;
 
 }
@@ -403,7 +405,7 @@ html {
 
 .profile_followers,
 .profile_following {
-    line-height: 2rem;
+    line-height: 5rem;
 }
 
 .profile_username {
@@ -424,11 +426,15 @@ html {
 .success_message,
 .popup_notification,
 .error_message {
+    max-height: 6rem;
+    max-width: 20rem;
     position: fixed;
     right: 2rem;
     bottom: 3rem;
     padding: 1rem;
-    color: white
+    color: white;
+
+
 }
 
 .success_message {
@@ -618,7 +624,7 @@ html {
 .send-icon {
     font-size: 2rem;
     position: static;
-    width: 6%;
+    width: fit-content;
     margin: 0 0.5rem;
 }
 

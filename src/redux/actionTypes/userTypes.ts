@@ -25,7 +25,8 @@ export enum ActionType {
     GET_USER_PROFILE_SUCCESS = "GET_USER_PROFILE_SUCCESS",
     GET_OTHER_USER_PROFILE_SUCCESS = "GET_OTHER_USER_PROFILE_SUCCESS",
     FOLLOW_ACTION_SUCCESS = "FOLLOW_ACTION_SUCCESS",
-    EDIT_USER_SUCCESS = "EDIT_USER_SUCCESS"
+    EDIT_USER_SUCCESS = "EDIT_USER_SUCCESS",
+    REMOVE_USER_PROFILE_DATA = "REMOVE_USER_PROFILE_DATA"
 }
 
 interface getUserProfleAction {
@@ -35,7 +36,7 @@ interface getUserProfleAction {
 
 interface getOtherUserProfleAction {
     type: ActionType.GET_OTHER_USER_PROFILE_SUCCESS;
-    payload: ProfileInterface;
+    payload: ProfileInterface | null;
 }
 
 interface followAction {
@@ -47,4 +48,8 @@ interface editUserSuccess {
     type: ActionType.EDIT_USER_SUCCESS;
 }
 
-export type Action = getUserProfleAction | getOtherUserProfleAction | followAction | editUserSuccess
+interface removeUserProfileData {
+    type: ActionType.REMOVE_USER_PROFILE_DATA;
+}
+
+export type Action = getUserProfleAction | getOtherUserProfleAction | followAction | editUserSuccess | removeUserProfileData

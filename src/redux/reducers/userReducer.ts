@@ -2,7 +2,7 @@ import { Action, ActionType, ProfileInterface } from "../actionTypes/userTypes";
 
 interface State {
     user: ProfileInterface | null,
-    current_user: ProfileInterface | any,
+    current_user: ProfileInterface | any | null,
 
 }
 
@@ -28,6 +28,12 @@ export const userReducer = (state: State = initialState, action: Action): State 
             return {
                 ...state,
                 current_user: { ...state.current_user, followers: action.payload.followers, is_followed_by_me: action.payload.follow }
+            }
+        case ActionType.REMOVE_USER_PROFILE_DATA:
+            return {
+                ...state,
+                user: null,
+                current_user: null
             }
         default:
             return state;

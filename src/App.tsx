@@ -22,6 +22,7 @@ import { PopupNotification } from "./components/notification/PopupNotification";
 import { ActionType } from "./redux/actionTypes/notificationTypes";
 import { getNotificationText } from "./utils/getNotificationText";
 import { Settings } from "./pages/Settings";
+import { UserNotFound } from "./pages/error_pages/UserNotFound";
 
 function App() {
   const dispatch = useDispatch()
@@ -75,6 +76,7 @@ function App() {
             <Route path="/profile/:username" element={<Profile />} />
             <Route path="/post/:id" element={<Post />} />
             <Route path="/settings" element={<Settings />} />
+            <Route path="/user-not-found" element={<UserNotFound />} />
           </Routes>
         </div>
         {loading && <Loading />}

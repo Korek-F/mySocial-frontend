@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { useParams } from 'react-router'
+import { useNavigate, useParams } from 'react-router'
 import { Post } from '../components/posts/Post'
 import { EditModal } from '../components/profile/EditModal'
 import { useTypedSelector } from '../hooks/useTypeSelector'
@@ -24,7 +24,10 @@ export const Profile = () => {
             dispatch(getOtherUserProfile(username) as any)
             dispatch(getUserPosts(username) as any)
         }
+
     }, [username, edit, dispatch])
+
+
 
     const followOnClick = () => {
         dispatch(followAction(username || "TEST") as any)
@@ -32,10 +35,7 @@ export const Profile = () => {
     }
     return (
         <div className='user_profile_page'>
-
-
             <div className='profile_upper'>
-
 
                 {current_user &&
                     <>

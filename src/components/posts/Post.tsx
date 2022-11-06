@@ -18,7 +18,7 @@ type PostProps = {
 export const Post: React.FC<PostProps> = ({ postData }) => {
     const dispatch = useDispatch()
 
-    console.log("DSFASDF")
+
 
     const deletePostClick = () => {
         dispatch(deletePost(postData.id) as any)
@@ -27,6 +27,8 @@ export const Post: React.FC<PostProps> = ({ postData }) => {
     const likeOrDislike = () => {
         dispatch(changeLikeStatus(postData.id, true) as any)
     }
+
+
 
     return (
 
@@ -54,7 +56,9 @@ export const Post: React.FC<PostProps> = ({ postData }) => {
                 <div className='post_content'>
                     <div className='post_title'><b> {postData.title} </b></div>
 
-                    <div className='post_body'>{postData.body}</div>
+                    <div className='post_body'>
+                        {postData.body}
+                    </div>
                 </div>
             </Link>
 
